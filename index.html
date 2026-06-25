@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>chun hyemin — 3D Environment & Prop Artist</title>
+<meta name="description" content="Portfolio of chun hyemin (전혜민) — 3D environment & prop artist. Modeling, sculpting, texturing, and lighting for games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0e10; --bg2:#141619; --bg3:#1b1e22;
+  --line:#26292e; --line2:#363a41;
+  --ink:#ece8e1; --dim:#9a9ca1; --faint:#5f6268;
+  --ember:#cb7a31; --ember-ink:#f0a558; --ember-soft:rgba(203,122,49,.14);
+  --disp:'Bricolage Grotesque',-apple-system,system-ui,sans-serif;
+  --body:'Inter',-apple-system,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --nav-h:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:var(--ember);color:#1a120a}
+.wrap{max-width:1320px;margin:0 auto;padding:0 28px}
+.mono{font-family:var(--mono)}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px; backdrop-filter:blur(14px);
+  background:linear-gradient(180deg,rgba(13,14,16,.92),rgba(13,14,16,.62));
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:baseline;gap:10px;cursor:pointer}
+.brand b{font-family:var(--disp);font-weight:800;font-size:18px;letter-spacing:-.01em}
+.brand span{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.12em}
+.navlinks{display:flex;gap:4px;align-items:center}
+.navlinks a{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--dim);
+  padding:8px 12px;border-radius:7px;transition:color .2s,background .2s;text-transform:uppercase;
+}
+.navlinks a:hover{color:var(--ink);background:var(--bg2)}
+.navlinks a.active{color:var(--ember-ink)}
+.menu-btn{display:none;background:none;border:1px solid var(--line2);color:var(--ink);
+  width:40px;height:40px;border-radius:8px;font-size:18px;cursor:pointer}
+
+/* ---------- HERO / ABOUT ---------- */
+#about{padding:calc(var(--nav-h) + 9vh) 0 11vh;position:relative;overflow:hidden}
+.ghost{
+  position:absolute;right:-2%;top:8%;font-family:var(--disp);font-weight:800;
+  font-size:min(26vw,360px);line-height:.8;color:#fff;opacity:.022;
+  pointer-events:none;user-select:none;white-space:nowrap;letter-spacing:-.04em;
+}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.34em;color:var(--ember-ink);
+  text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.eyebrow::before{content:"";width:42px;height:1px;background:var(--ember)}
+.hero-name{
+  font-family:var(--disp);font-weight:800;letter-spacing:-.035em;line-height:.92;
+  font-size:clamp(48px,9.2vw,138px);margin:0;
+}
+.hero-name .ko{display:block;font-size:.34em;color:var(--dim);font-weight:700;
+  letter-spacing:.02em;margin-top:.35em}
+.hero-lead{max-width:560px;margin:34px 0 0;color:var(--dim);font-size:clamp(16px,1.7vw,19px)}
+.hero-lead b{color:var(--ink);font-weight:600}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--dim);
+  border:1px solid var(--line2);border-radius:999px;padding:7px 13px;background:var(--bg2)}
+.contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:38px}
+.btn{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;cursor:pointer;
+  border:1px solid var(--line2);background:var(--bg2);color:var(--ink);
+  padding:13px 20px;border-radius:10px;transition:.2s;display:inline-flex;align-items:center;gap:9px;
+}
+.btn:hover{border-color:var(--ember);color:var(--ember-ink);transform:translateY(-1px)}
+.btn.solid{background:var(--ember);border-color:var(--ember);color:#160d04;font-weight:700}
+.btn.solid:hover{background:var(--ember-ink);color:#160d04}
+.meta-row{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:30px;
+  display:flex;gap:20px;flex-wrap:wrap;letter-spacing:.06em}
+
+/* ---------- WORK ---------- */
+.work-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+  padding-top:14px;margin-bottom:24px;border-top:1px solid var(--line)}
+.work-head h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,40px);
+  letter-spacing:-.02em;margin:30px 0 0}
+.work-head .count{font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.08em}
+.filters{position:sticky;top:var(--nav-h);z-index:40;display:flex;gap:8px;flex-wrap:wrap;
+  padding:16px 0;background:linear-gradient(180deg,var(--bg) 70%,rgba(13,14,16,0));margin-bottom:8px}
+.fchip{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:999px;
+  padding:9px 16px;cursor:pointer;transition:.18s;display:flex;align-items:center;gap:8px}
+.fchip:hover{border-color:var(--line2);color:var(--ink)}
+.fchip.active{background:var(--ink);color:#111;border-color:var(--ink);font-weight:700}
+.fchip .n{font-size:10px;opacity:.6}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px;padding-bottom:30px}
+.card{position:relative;cursor:pointer;background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;opacity:0;transform:translateY(18px);
+  transition:opacity .6s ease,transform .6s ease}
+.card.in{opacity:1;transform:none}
+.card .ph{aspect-ratio:16/9;overflow:hidden;background:var(--bg3)}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s}
+.card:hover .ph img{transform:scale(1.045)}
+.card .info{padding:15px 17px 17px;border-top:1px solid var(--line)}
+.card .date{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--faint);
+  text-transform:uppercase;height:0;opacity:0;overflow:hidden;
+  transition:height .3s ease,opacity .3s ease,margin .3s ease}
+.card:hover .date{height:16px;opacity:1;margin-bottom:5px}
+.card .title{font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:-.01em;
+  display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card .title .cat{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;
+  color:var(--faint);border:1px solid var(--line2);border-radius:5px;padding:3px 7px}
+.tags{position:absolute;top:12px;left:12px;display:flex;gap:7px;z-index:2}
+.tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;
+  padding:5px 9px;border-radius:6px;backdrop-filter:blur(6px)}
+.tag.new{background:var(--ember);color:#160d04}
+.tag.views{background:rgba(10,11,12,.7);color:var(--ink);border:1px solid var(--line2);
+  display:flex;align-items:center;gap:5px}
+.tag.views::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ember-ink)}
+
+.empty{padding:70px 0 90px;text-align:center;color:var(--faint);font-family:var(--mono);font-size:13px;letter-spacing:.05em}
+
+/* ---------- LIGHTBOX ---------- */
+.lb{position:fixed;inset:0;z-index:90;display:none;background:rgba(8,9,10,.93);
+  backdrop-filter:blur(10px)}
+.lb.open{display:flex}
+.lb-main{flex:1;display:flex;flex-direction:column;min-width:0;padding:18px 18px 0}
+.lb-stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lb-stage iframe{width:min(100%,1100px);aspect-ratio:16/9;border:0;border-radius:8px}
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;
+  border-radius:50%;border:1px solid var(--line2);background:rgba(20,22,25,.7);color:var(--ink);
+  font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:.2s;z-index:3}
+.lb-arrow:hover{background:var(--ember);color:#160d04;border-color:var(--ember)}
+.lb-arrow.prev{left:4px}.lb-arrow.next{right:4px}
+.lb-cap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  padding:16px 4px 18px;border-top:1px solid rgba(255,255,255,.06);margin-top:14px}
+.lb-cap .t{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:-.01em}
+.lb-cap .hud{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.08em;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.lb-cap .hud .v{color:var(--ember-ink)}
+.lb-cap .tl{display:flex;gap:6px}
+.lb-cap .tl span{font-family:var(--mono);font-size:10px;color:var(--faint);
+  border:1px solid var(--line);border-radius:5px;padding:3px 7px}
+.lb-close{position:absolute;top:16px;right:18px;z-index:5;width:44px;height:44px;border-radius:10px;
+  border:1px solid var(--line2);background:rgba(20,22,25,.7);color:var(--ink);font-size:18px;cursor:pointer}
+.lb-close:hover{border-color:var(--ember);color:var(--ember-ink)}
+.rail{width:128px;flex-shrink:0;border-left:1px solid rgba(255,255,255,.07);
+  overflow-y:auto;padding:18px 14px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin}
+.rail::-webkit-scrollbar{width:6px}.rail::-webkit-scrollbar-thumb{background:var(--line2);border-radius:3px}
+.rail .rlabel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--faint);
+  text-transform:uppercase;margin-bottom:2px}
+.rthumb{aspect-ratio:16/10;border-radius:7px;overflow:hidden;cursor:pointer;
+  border:2px solid var(--line);opacity:.62;transition:.2s;background:var(--bg3)}
+.rthumb img{width:100%;height:100%;object-fit:cover}
+.rthumb:hover{opacity:.85}
+.rthumb.active{opacity:1;border-color:var(--ember)}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line);margin-top:30px;padding:54px 0 70px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap}
+.foot .big{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,46px);letter-spacing:-.02em}
+.foot .r{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.foot small{display:block;font-family:var(--mono);font-size:11px;color:var(--faint);
+  letter-spacing:.06em;margin-top:30px}
+.totop{position:fixed;right:22px;bottom:22px;z-index:55;width:46px;height:46px;border-radius:12px;
+  border:1px solid var(--line2);background:rgba(20,22,25,.8);backdrop-filter:blur(8px);
+  color:var(--ink);font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{border-color:var(--ember);color:var(--ember-ink)}
+
+/* ---------- TOAST ---------- */
+.toast{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);z-index:120;
+  background:#fff;color:#15171a;font-family:var(--mono);font-size:13px;letter-spacing:.02em;
+  padding:16px 26px;border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.5);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;display:flex;align-items:center;gap:10px}
+.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.toast b{color:var(--ember)}
+
+@media (max-width:880px){
+  .navlinks{display:none}
+  .menu-btn{display:block}
+  .nav.menu-open .navlinks{display:flex;position:absolute;top:var(--nav-h);right:14px;left:14px;
+    flex-direction:column;gap:2px;background:var(--bg2);border:1px solid var(--line2);
+    border-radius:12px;padding:10px}
+  .nav.menu-open .navlinks a{padding:12px 14px}
+  .grid{grid-template-columns:1fr}
+  .rail{display:none}
+  .lb-cap .tl{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  .card{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="brand" onclick="goAbout()">
+    <b>chun&nbsp;hyemin</b><span>전혜민</span>
+  </div>
+  <div class="navlinks" id="navlinks">
+    <a href="#about" class="active" data-nav="about">About</a>
+    <a href="#work" data-nav="work">Work</a>
+    <a href="#" data-cat="PERSONAL">Personal</a>
+    <a href="#" data-cat="DESIGNER">Designer</a>
+    <a href="#" id="email-nav">Email</a>
+  </div>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+</nav>
+
+<!-- ABOUT -->
+<header id="about">
+  <div class="ghost" aria-hidden="true">HYEMIN</div>
+  <div class="wrap">
+    <div class="eyebrow">3D Environment &amp; Prop Artist</div>
+    <h1 class="hero-name">chun&nbsp;hyemin<span class="ko">전혜민 · 3D 아티스트</span></h1>
+    <p class="hero-lead">게임을 위한 <b>환경과 프롭</b>을 만듭니다. 모델링·스컬핑·텍스처링·라이팅을 거쳐
+      분위기를 가진 한 장면으로 완성하는 작업을 합니다.</p>
+    <div class="tools" id="aboutTools"></div>
+    <div class="contact">
+      <button class="btn solid" id="copyEmail">✉ 7120mh@naver.com</button>
+      <a class="btn" href="#work">작업 보기 ↓</a>
+    </div>
+    <div class="meta-row">
+      <span>BASED IN — SEOUL, KR</span>
+      <span id="projCount">— PROJECTS</span>
+      <span>SINCE 2022</span>
+    </div>
+  </div>
+</header>
+
+<!-- WORK -->
+<main id="work" class="wrap">
+  <div class="work-head">
+    <h2>Selected Work</h2>
+    <div class="count" id="workCount"></div>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="emptyState" style="display:none"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="big">Let’s build worlds.</div>
+      <div class="r">
+        <button class="btn solid" id="copyEmail2">✉ 7120mh@naver.com</button>
+        <button class="btn" onclick="goAbout()">↑ Back to top</button>
+      </div>
+    </div>
+    <small>© <span id="yr"></span> chun hyemin (전혜민) · 3D Environment &amp; Prop Artist · Seoul, KR</small>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="Back to top">↑</button>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <div class="lb-main">
+    <div class="lb-stage" id="lbStage">
+      <button class="lb-arrow prev" id="lbPrev" aria-label="Previous">‹</button>
+      <div id="lbMedia"></div>
+      <button class="lb-arrow next" id="lbNext" aria-label="Next">›</button>
+    </div>
+    <div class="lb-cap">
+      <span class="t" id="lbTitle"></span>
+      <span class="hud" id="lbHud"></span>
+      <span class="tl" id="lbTools"></span>
+    </div>
+  </div>
+  <div class="rail" id="rail"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const PROJECTS = [{"id": "202605_Rock", "title": "Rock Material Study", "date": "2026-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202605_Rock/돌마크.png", "images": ["Personal/202605_Rock/돌마크.png", "Personal/202605_Rock/1 (2).jpg", "Personal/202605_Rock/1(3)-(4).jpg", "Personal/202605_Rock/1.jpg", "Personal/202605_Rock/2.jpg", "Personal/202605_Rock/3.jpg", "Personal/202605_Rock/5.jpg", "Personal/202605_Rock/6 복사.jpg", "Personal/202605_Rock/6.jpg", "Personal/202605_Rock/8.jpg", "Personal/202605_Rock/9.jpg", "Personal/202605_Rock/10.jpg", "Personal/202605_Rock/11.jpg", "Personal/202605_Rock/123.jpg", "Personal/202605_Rock/a.png", "Personal/202605_Rock/wqe123.jpg"]}, {"id": "202602_Prop", "title": "Chest & Props", "date": "2026-02", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202602_Prop/1.jpg", "images": ["Personal/202602_Prop/1.jpg", "Personal/202602_Prop/2.jpg", "Personal/202602_Prop/3.jpg", "Personal/202602_Prop/4.jpg", "Personal/202602_Prop/5.jpg", "Personal/202602_Prop/6 복사.jpg", "Personal/202602_Prop/6.jpg", "Personal/202602_Prop/7.jpg", "Personal/202602_Prop/8.jpg", "Personal/202602_Prop/9.jpg", "Personal/202602_Prop/10(1).jpg", "Personal/202602_Prop/10(2).jpg", "Personal/202602_Prop/10(3).jpg", "Personal/202602_Prop/10(4).jpg", "Personal/202602_Prop/10.jpg", "Personal/202602_Prop/11.jpg", "Personal/202602_Prop/97-(2).jpg", "Personal/202602_Prop/967.jpg", "Personal/202602_Prop/aasd.jpg", "Personal/202602_Prop/ada.jpg", "Personal/202602_Prop/adf.jpg", "Personal/202602_Prop/dad.jpg", "Personal/202602_Prop/ddd.jpg", "Personal/202602_Prop/ddsa.jpg", "Personal/202602_Prop/fff.png", "Personal/202602_Prop/ggg.jpg", "Personal/202602_Prop/NewLevelSequence__(6)0001_Ultra.jpg", "Personal/202602_Prop/qq.jpg", "Personal/202602_Prop/qs.jpg", "Personal/202602_Prop/vvv.jpg", "Personal/202602_Prop/wq.jpg", "Personal/202602_Prop/wt.jpg", "Personal/202602_Prop/xxx.jpg", "Personal/202602_Prop/제목-없음-1.jpg"]}, {"id": "202511_Ballista", "title": "Ballista", "date": "2025-11", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202511_Ballista/4.jpg", "images": ["Personal/202511_Ballista/4.jpg", "Personal/202511_Ballista/4(1).jpg", "Personal/202511_Ballista/4(2).jpg", "Personal/202511_Ballista/4(3).jpg", "Personal/202511_Ballista/wwwew__(10)0001_Ultra.jpg", "Personal/202511_Ballista/wwwew__(13)0000_Ultra.jpg"]}, {"id": "202511_Carriage", "title": "Carriage", "date": "2025-11", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202511_Carriage/2.jpg", "images": ["Personal/202511_Carriage/2.jpg", "Personal/202511_Carriage/2(1).jpg", "Personal/202511_Carriage/2(2).jpg", "Personal/202511_Carriage/2(3).jpg", "Personal/202511_Carriage/2(4).jpg", "Personal/202511_Carriage/2(5).jpg", "Personal/202511_Carriage/6 (3).png", "Personal/202511_Carriage/aeaedd__(7)0003_Ultra.jpg", "Personal/202511_Carriage/aeaedd__(8)0002_Ultra.jpg"]}, {"id": "202508_Substance 3D Designer", "title": "Substance Designer", "date": "2025-08", "category": "DESIGNER", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202508_Substance 3D Designer/섭디마크.jpg", "images": ["Personal/202508_Substance 3D Designer/섭디마크.jpg", "Personal/202508_Substance 3D Designer/1(5)-(5).jpg", "Personal/202508_Substance 3D Designer/1(6)-(4).jpg", "Personal/202508_Substance 3D Designer/1-(4).jpg", "Personal/202508_Substance 3D Designer/0821(1).jpg", "Personal/202508_Substance 3D Designer/0821.jpg", "Personal/202508_Substance 3D Designer/Desktop(1).jpg", "Personal/202508_Substance 3D Designer/Desktop_012.jpg", "Personal/202508_Substance 3D Designer/m_001.jpg", "Personal/202508_Substance 3D Designer/ss.jpg", "Personal/202508_Substance 3D Designer/ww.jpg", "Personal/202508_Substance 3D Designer/www.jpg"]}, {"id": "202506_Oceanic restaurant", "title": "Oceanic Restaurant", "date": "2025-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202506_Oceanic restaurant/2-(2).jpg", "images": ["Personal/202506_Oceanic restaurant/2-(2).jpg", "Personal/202506_Oceanic restaurant/2(1)-(2).jpg", "Personal/202506_Oceanic restaurant/2(2)-(2).jpg", "Personal/202506_Oceanic restaurant/2(3)-(2).jpg", "Personal/202506_Oceanic restaurant/2(4)-(2).jpg", "Personal/202506_Oceanic restaurant/2(5)-(2).jpg", "Personal/202506_Oceanic restaurant/2(6).jpg", "Personal/202506_Oceanic restaurant/2(7).jpg", "Personal/202506_Oceanic restaurant/2(8).jpg", "Personal/202506_Oceanic restaurant/2(9).jpg", "Personal/202506_Oceanic restaurant/2(10).jpg", "Personal/202506_Oceanic restaurant/2(11).jpg", "Personal/202506_Oceanic restaurant/2(12).jpg", "Personal/202506_Oceanic restaurant/2(13).jpg", "Personal/202506_Oceanic restaurant/2(14).jpg", "Personal/202506_Oceanic restaurant/2(15).jpg", "Personal/202506_Oceanic restaurant/2(16).jpg", "Personal/202506_Oceanic restaurant/2(17).jpg", "Personal/202506_Oceanic restaurant/2(18).jpg", "Personal/202506_Oceanic restaurant/2(19).jpg"]}, {"id": "202506_Typewriter", "title": "Typewriter", "date": "2025-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202506_Typewriter/1-(2).jpg", "images": ["Personal/202506_Typewriter/1-(2).jpg", "Personal/202506_Typewriter/1(1)-(2).jpg", "Personal/202506_Typewriter/1(1)-(5).jpg", "Personal/202506_Typewriter/1(2)-(2).jpg", "Personal/202506_Typewriter/1(2)-(5).jpg", "Personal/202506_Typewriter/1(3)-(2).jpg", "Personal/202506_Typewriter/1(3)-(5).jpg", "Personal/202506_Typewriter/1(4)-(2).jpg", "Personal/202506_Typewriter/1(4)-(5).jpg", "Personal/202506_Typewriter/1(5)-(2).jpg"]}, {"id": "202505_Fireplace", "title": "Fireplace", "date": "2025-05", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202505_Fireplace/HighresScreenshot00548.jpg", "images": ["Personal/202505_Fireplace/HighresScreenshot00548.jpg", "Personal/202505_Fireplace/1(3)-(3).jpg", "Personal/202505_Fireplace/HighresScreenshot00550.jpg", "Personal/202505_Fireplace/HighresScreenshot00551_edited.jpg", "Personal/202505_Fireplace/HighresScreenshot00589.jpg"]}, {"id": "202501_Sci-Fi-Corridor", "title": "Sci-Fi Corridor", "date": "2025-01", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00295.jpg", "images": ["Personal/202501_Sci-Fi-Corridor/HighresScreenshot00295.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00297.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00298.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00300.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00302.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00303.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00304.jpg"]}, {"id": "2022_University", "title": "Library — Graduation Work", "date": "2022-09", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/2022_University/정면.jpg", "images": ["Personal/2022_University/정면.jpg", "Personal/2022_University/01.png", "Personal/2022_University/02.png", "Personal/2022_University/3.png", "Personal/2022_University/04.PNG", "Personal/2022_University/5.png", "Personal/2022_University/45.png", "Personal/2022_University/45a1.png", "Personal/2022_University/452.png", "Personal/2022_University/2021470008.jpg", "Personal/2022_University/2021470008_전혜민.png", "Personal/2022_University/aa.png", "Personal/2022_University/back.png", "Personal/2022_University/dkv.png", "Personal/2022_University/서고2.png", "Personal/2022_University/정면.PNG"]}];
+const BASELINE = {"2022_University": 7, "202501_Sci-Fi-Corridor": 88, "202505_Fireplace": 120, "202506_Oceanic restaurant": 96, "202506_Typewriter": 44, "202508_Substance 3D Designer": 73, "202511_Ballista": 38, "202511_Carriage": 51, "202602_Prop": 142, "202605_Rock": 9};       // editable seed counts (your Firestore numbers can replace these)
+const EMAIL = "7120mh@naver.com";
+const CAT_LABEL = {ALL:"All", PERSONAL:"Personal", DESIGNER:"Designer", PROFESSIONAL:"Professional", SKETCH:"Sketch", RELIGHT:"Re:Lighting"};
+const CAT_ORDER = ["ALL","PERSONAL","DESIGNER","PROFESSIONAL","SKETCH","RELIGHT"];
+
+/* ---- helpers ---- */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const enc=p=>p.split('/').map(encodeURIComponent).join('/');
+const fmtDate=d=>d.replace('-','.');
+function isNew(d){const t=new Date(d+'-01T00:00:00').getTime();return (Date.now()-t)<=30*864e5;}
+function lsGet(){try{return JSON.parse(localStorage.getItem('imageViews')||'{}')}catch{return{}}}
+function lsSet(o){try{localStorage.setItem('imageViews',JSON.stringify(o))}catch{}}
+function viewsOf(id){return (BASELINE[id]||0)+((lsGet()[id])||0);}
+function bumpView(id){
+  let seen;try{seen=JSON.parse(sessionStorage.getItem('viewedSession')||'[]')}catch{seen=[]}
+  if(seen.includes(id))return;
+  seen.push(id);try{sessionStorage.setItem('viewedSession',JSON.stringify(seen))}catch{}
+  const o=lsGet();o[id]=(o[id]||0)+1;lsSet(o);
+}
+function normMedia(m){return typeof m==='string'?{type:'image',src:m}:m;}
+
+/* ---- state ---- */
+let activeCat='ALL';
+let flat=[];      // [{proj, media, mi}] for current category
+let pos=0;        // index into flat for lightbox
+
+function catProjects(cat){return cat==='ALL'?PROJECTS:PROJECTS.filter(p=>p.category===cat);}
+function catCount(cat){return catProjects(cat).length;}
+
+/* ---- filters ---- */
+function buildFilters(){
+  const f=$('#filters');f.innerHTML='';
+  CAT_ORDER.forEach(cat=>{
+    const n=catCount(cat);
+    if(cat!=='ALL'&&n===0)return;           // hide empty categories
+    const b=document.createElement('button');
+    b.className='fchip'+(cat===activeCat?' active':'');
+    b.innerHTML=CAT_LABEL[cat]+' <span class="n">'+(cat==='ALL'?PROJECTS.length:n)+'</span>';
+    b.onclick=()=>{activeCat=cat;buildFilters();renderGrid();};
+    f.appendChild(b);
+  });
+}
+
+/* ---- grid ---- */
+let io;
+function renderGrid(){
+  const grid=$('#grid'), empty=$('#emptyState');
+  const list=catProjects(activeCat);
+  grid.innerHTML='';
+  $('#workCount').textContent='['+String(list.length).padStart(2,'0')+'] '+CAT_LABEL[activeCat].toUpperCase();
+  if(!list.length){grid.style.display='none';empty.style.display='block';
+    empty.textContent='// '+CAT_LABEL[activeCat]+' — work landing here soon.';return;}
+  grid.style.display='grid';empty.style.display='none';
+  list.forEach(p=>{
+    const v=viewsOf(p.id);
+    const card=document.createElement('div');
+    card.className='card';
+    card.innerHTML=`
+      <div class="tags">
+        ${isNew(p.date)?'<span class="tag new">NEW</span>':''}
+        ${v>=10?'<span class="tag views">'+v+'</span>':''}
+      </div>
+      <div class="ph"><img loading="lazy" src="${enc(p.cover)}" alt="${p.title}"></div>
+      <div class="info">
+        <div class="date">${fmtDate(p.date)}</div>
+        <div class="title">${p.title}<span class="cat">${p.category}</span></div>
+      </div>`;
+    card.onclick=()=>openLightbox(p.id);
+    grid.appendChild(card);
+    if(io)io.observe(card);
+  });
+}
+
+/* ---- lightbox ---- */
+function buildFlatProject(p){
+  return (p.images||[]).map((m,i)=>({proj:p,media:normMedia(m),mi:i,total:p.images.length}));
+}
+function openLightbox(projId){
+  const p=PROJECTS.find(x=>x.id===projId);
+  flat=buildFlatProject(p);   // project bundle; sequential nav stays within this work
+  pos=0;
+  $('#lb').classList.add('open');
+  document.body.style.overflow='hidden';
+  buildRail();
+  show();
+}
+function closeLightbox(){$('#lb').classList.remove('open');document.body.style.overflow='';renderGrid();}
+let curProj=null;
+function show(){
+  const item=flat[pos];if(!item)return;
+  const p=item.proj;
+  if(p!==curProj){curProj=p;bumpView(p.id);} // count once per session when entering a project
+  const media=$('#lbMedia');
+  if(item.media.type==='youtube'){
+    media.innerHTML=`<iframe src="https://www.youtube.com/embed/${item.media.id}?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+  }else{
+    media.innerHTML=`<img src="${enc(item.media.src)}" alt="${p.title}">`;
+  }
+  $('#lbTitle').textContent=p.title;
+  const v=viewsOf(p.id);
+  $('#lbHud').innerHTML=`<span>${fmtDate(p.date)}</span><span>${p.category}</span>`+
+    `<span>${String(item.mi+1).padStart(2,'0')} / ${String(item.total).padStart(2,'0')}</span>`+
+    (v>=10?`<span class="v">◍ ${v} views</span>`:'')+
+    (isNew(p.date)?`<span class="v">● NEW</span>`:'');
+  $('#lbTools').innerHTML=(p.tools||[]).map(t=>`<span>${t}</span>`).join('');
+  // highlight rail
+  $$('.rthumb').forEach((el,i)=>{el.classList.toggle('active',i===pos);if(i===pos)el.scrollIntoView({block:'nearest'});});
+}
+function buildRail(){
+  const rail=$('#rail');
+  const p=flat[0]?flat[0].proj:null;
+  rail.innerHTML=`<div class="rlabel">${p?p.title:''} · ${flat.length}</div>`;
+  flat.forEach((item,i)=>{
+    const t=document.createElement('div');
+    t.className='rthumb';
+    const thumb=item.media.type==='youtube'?(item.media.thumb||''):item.media.src;
+    t.innerHTML=`<img loading="lazy" src="${enc(thumb)}" alt="">`;
+    t.onclick=()=>{pos=i;show();};
+    rail.appendChild(t);
+  });
+}
+function step(d){pos=(pos+d+flat.length)%flat.length;show();}
+
+/* wheel = sequential (debounced) */
+let wheelLock=false;
+$('#lbStage').addEventListener('wheel',e=>{
+  e.preventDefault();if(wheelLock)return;wheelLock=true;
+  step(e.deltaY>0?1:-1);setTimeout(()=>wheelLock=false,260);
+},{passive:false});
+
+$('#lbPrev').onclick=()=>step(-1);
+$('#lbNext').onclick=()=>step(1);
+$('#lbClose').onclick=closeLightbox;
+$('#lb').addEventListener('click',e=>{if(e.target.id==='lb'||e.target.id==='lbStage')closeLightbox();});
+document.addEventListener('keydown',e=>{
+  if(!$('#lb').classList.contains('open'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowRight')step(1);
+  if(e.key==='ArrowLeft')step(-1);
+});
+
+/* ---- email copy + toast ---- */
+function toast(msg){const t=$('#toast');t.innerHTML=msg;t.classList.add('show');
+  clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1600);}
+async function copyEmail(){
+  try{await navigator.clipboard.writeText(EMAIL);}
+  catch{const ta=document.createElement('textarea');ta.value=EMAIL;document.body.appendChild(ta);
+    ta.select();try{document.execCommand('copy')}catch{}ta.remove();}
+  toast('이메일이 복사되었어요 — <b>'+EMAIL+'</b>');
+}
+$('#copyEmail').onclick=copyEmail;
+$('#copyEmail2').onclick=copyEmail;
+$('#email-nav').onclick=e=>{e.preventDefault();copyEmail();};
+
+/* ---- nav ---- */
+function goAbout(){window.scrollTo({top:0,behavior:'smooth'});setMenu(false);}
+$$('#navlinks a[data-cat]').forEach(a=>a.onclick=e=>{
+  e.preventDefault();activeCat=a.dataset.cat;buildFilters();renderGrid();
+  $('#work').scrollIntoView({behavior:'smooth'});setMenu(false);
+});
+$$('#navlinks a[data-nav]').forEach(a=>a.onclick=()=>setMenu(false));
+function setMenu(v){$('#nav').classList.toggle('menu-open',v);}
+$('#menuBtn').onclick=()=>setMenu(!$('#nav').classList.contains('menu-open'));
+
+/* active nav + back-to-top on scroll */
+const aboutEl=$('#about'),workEl=$('#work');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  $('#totop').classList.toggle('show',y>600);
+  const inWork=y> (workEl.offsetTop-120);
+  $$('#navlinks a[data-nav]').forEach(a=>a.classList.toggle('active',
+    (a.dataset.nav==='work')===inWork));
+},{passive:true});
+$('#totop').onclick=goAbout;
+
+/* reveal on scroll */
+io=new IntersectionObserver((es)=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.08});
+
+/* init */
+function init(){
+  $('#yr').textContent=new Date().getFullYear();
+  $('#projCount').textContent=PROJECTS.length+' PROJECTS';
+  const tset=[...new Set(PROJECTS.flatMap(p=>p.tools||[]))];
+  $('#aboutTools').innerHTML=["3ds Max","ZBrush","Substance Painter","Substance Designer","Marmoset","Unreal Engine 5"].map(t=>`<span class="chip">${t}</span>`).join('');
+  buildFilters();renderGrid();
+}
+init();
+</script>
+</body>
+</html>
