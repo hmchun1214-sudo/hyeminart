@@ -207,6 +207,62 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:54px 0 70px}
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
   .card{opacity:1;transform:none}
 }
+/* ===== reference-style hero video + category sections ===== */
+#about{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 0 8vh;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000}
+.hero-bg iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:100vw;height:56.25vw;min-height:100%;min-width:177.78vh;pointer-events:none;border:0}
+.hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(13,14,16,.62) 0%,rgba(13,14,16,.22) 38%,rgba(13,14,16,.55) 72%,rgba(13,14,16,.94) 100%)}
+#about .ghost{z-index:1;opacity:.05;top:auto;bottom:6vh;right:-1%}
+#about .wrap{position:relative;z-index:2;width:100%}
+.hero-name{text-shadow:0 6px 40px rgba(0,0,0,.55)}
+.hero-feat{position:absolute;right:28px;bottom:8vh;z-index:2;text-align:right;
+  font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--ink)}
+.hero-feat b{font-family:var(--disp);font-weight:800;font-size:18px;letter-spacing:.02em;display:block}
+.hero-feat span{display:block;font-size:9px;letter-spacing:.32em;color:var(--ember-ink);margin-bottom:5px}
+
+#work{padding-top:0}
+.cat-sec{padding:8vh 0 3vh;border-top:1px solid var(--line)}
+.cat-sec:first-child{border-top:0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  flex-wrap:wrap;margin-bottom:28px}
+.sec-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--ember-ink);
+  text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-family:var(--disp);font-weight:800;font-size:clamp(34px,6.2vw,78px);
+  letter-spacing:-.03em;margin:0;line-height:.88}
+.sec-right{text-align:right;max-width:340px}
+.sec-count{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ember-ink);margin-bottom:7px}
+.sec-desc{font-family:var(--body);font-size:13.5px;color:var(--dim);line-height:1.5}
+@media (max-width:880px){
+  .hero-feat{display:none}
+  .sec-right{text-align:left;max-width:none}
+}
+/* ===== ArtStation-style image tiles ===== */
+.grid{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{border-radius:10px;border-color:rgba(255,255,255,.05);background:var(--bg3)}
+.card .ph{position:relative;aspect-ratio:16/10}
+.card:hover .ph img{transform:scale(1.06)}
+.card .ph::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  transition:opacity .35s ease;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.8) 100%)}
+.card:hover .ph::after{opacity:1}
+.card .info{position:absolute;left:0;right:0;bottom:0;z-index:3;border-top:0;background:none;
+  padding:14px 16px;opacity:0;transform:translateY(8px);
+  transition:opacity .35s ease,transform .35s ease}
+.card:hover .info{opacity:1;transform:none}
+.card .date{height:auto;opacity:1;overflow:visible;margin-bottom:3px;color:rgba(255,255,255,.72)}
+.card:hover .date{height:auto;margin-bottom:3px}
+.card .title{color:#fff;font-size:17px;text-shadow:0 2px 14px rgba(0,0,0,.65)}
+.card .title .cat{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.35);background:rgba(0,0,0,.28)}
+@media (max-width:880px){
+  .card .info{opacity:1;transform:none}
+  .card .ph::after{opacity:1}
+}
+
+/* Korean text: don't break inside words (fixes lone trailing syllable) */
+.sec-desc{word-break:keep-all}
 </style>
 </head>
 <body>
@@ -216,17 +272,19 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:54px 0 70px}
     <b>chun&nbsp;hyemin</b><span>전혜민</span>
   </div>
   <div class="navlinks" id="navlinks">
-    <a href="#about" class="active" data-nav="about">About</a>
-    <a href="#" data-cat="PERSONAL">Personal</a>
-    <a href="#" data-cat="DESIGNER">Designer</a>
-    <a href="#" id="email-nav">Email</a>
+    <a href="#sec-PERSONAL" data-jump="PERSONAL">Work</a>
+    <a href="#sec-DESIGNER" data-jump="DESIGNER">Designer</a>
+    <a href="#sec-SCHOOL" data-jump="SCHOOL">School</a>
+    <a href="#" id="email-nav">Contact</a>
   </div>
   <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
 </nav>
 
 <!-- ABOUT -->
 <header id="about">
-  <div class="ghost" aria-hidden="true">HYEMIN</div>
+  <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="ghost" aria-hidden="true">ENVIRONMENT</div>
   <div class="wrap">
     <div class="eyebrow">3D Environment &amp; Prop Artist</div>
     <h1 class="hero-name">chun&nbsp;hyemin<span class="ko">전혜민 · 3D 아티스트</span></h1>
@@ -235,7 +293,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:54px 0 70px}
     <div class="tools" id="aboutTools"></div>
     <div class="contact">
       <button class="btn solid" id="copyEmail">✉ 7120mh@naver.com</button>
-      <a class="btn" href="#work">작업 보기 ↓</a>
+      <a class="btn" href="#sec-PERSONAL">작업 보기 ↓</a>
     </div>
     <div class="meta-row">
       <span>BASED IN — SEOUL, KR</span>
@@ -243,17 +301,12 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:54px 0 70px}
       <span>SINCE 2022</span>
     </div>
   </div>
+  <div class="hero-feat" id="heroFeat"></div>
 </header>
 
 <!-- WORK -->
-<main id="work" class="wrap">
-  <div class="work-head">
-    <h2>Selected Work</h2>
-    <div class="count" id="workCount"></div>
-  </div>
-  <div class="filters" id="filters"></div>
-  <div class="grid" id="grid"></div>
-  <div class="empty" id="emptyState" style="display:none"></div>
+<main id="work">
+  <div id="sections"></div>
 </main>
 
 <footer>
@@ -293,7 +346,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:54px 0 70px}
 <div class="toast" id="toast"></div>
 
 <script>
-const PROJECTS = [{"id": "202605_Rock", "title": "Rock Material Study", "date": "2026-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202605_Rock/1.png", "images": ["Personal/202605_Rock/1.png", "Personal/202605_Rock/2.png", "Personal/202605_Rock/3.jpg", "Personal/202605_Rock/4.jpg", "Personal/202605_Rock/5.jpg", "Personal/202605_Rock/6.jpg", "Personal/202605_Rock/7.jpg", "Personal/202605_Rock/8.jpg", "Personal/202605_Rock/9.jpg", "Personal/202605_Rock/10.jpg", "Personal/202605_Rock/11.jpg", "Personal/202605_Rock/12.jpg", "Personal/202605_Rock/13.jpg", "Personal/202605_Rock/14.jpg", "Personal/202605_Rock/15.jpg", "Personal/202605_Rock/16.jpg", "Personal/202605_Rock/17.png"], "desc": "ZBrush로 스컬핑하고 Substance로 다듬은 바위 머티리얼 연구. 균열과 이끼, 마모된 표면을 PBR 텍스처로 표현하고 언리얼에서 라이팅으로 마무리했습니다."}, {"id": "202602_Prop", "title": "Props", "date": "2026-02", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202602_Prop/1.jpg", "images": ["Personal/202602_Prop/1.jpg", "Personal/202602_Prop/2.jpg", "Personal/202602_Prop/3.jpg", "Personal/202602_Prop/4.jpg", "Personal/202602_Prop/5.jpg", "Personal/202602_Prop/6.jpg", "Personal/202602_Prop/7.jpg", "Personal/202602_Prop/8.jpg", "Personal/202602_Prop/9.jpg", "Personal/202602_Prop/10.jpg", "Personal/202602_Prop/11.jpg", "Personal/202602_Prop/12.jpg", "Personal/202602_Prop/13.jpg", "Personal/202602_Prop/14.jpg", "Personal/202602_Prop/15.jpg", "Personal/202602_Prop/16.jpg", "Personal/202602_Prop/17.png", "Personal/202602_Prop/18.jpg", "Personal/202602_Prop/19.jpg", "Personal/202602_Prop/20.jpg", "Personal/202602_Prop/21.jpg", "Personal/202602_Prop/22.jpg", "Personal/202602_Prop/23.jpg", "Personal/202602_Prop/24.jpg", "Personal/202602_Prop/25.jpg", "Personal/202602_Prop/26.jpg"], "desc": "게임에 쓰일 소품 세트. 보관함과 오브제를 모델링·텍스처링하고, 낡은 금속과 나무의 질감을 살려 하나의 묶음으로 완성했습니다."}, {"id": "202511_Carriage", "title": "Carriage", "date": "2025-11", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202511_Carriage/2.jpg", "images": [{"type": "youtube", "id": "S3YrEdIoGwo", "thumb": "https://img.youtube.com/vi/S3YrEdIoGwo/maxresdefault.jpg"}, "Personal/202511_Carriage/2.jpg", "Personal/202511_Carriage/2(1).jpg", "Personal/202511_Carriage/2(2).jpg", "Personal/202511_Carriage/2(3).jpg", "Personal/202511_Carriage/2(4).jpg", "Personal/202511_Carriage/2(5).jpg", "Personal/202511_Carriage/6 (3).png", "Personal/202511_Carriage/aeaedd__(7)0003_Ultra.jpg", "Personal/202511_Carriage/aeaedd__(8)0002_Ultra.jpg"], "desc": "오래된 목재 마차. 풍화된 나뭇결과 녹슨 철물, 쌓인 흙먼지까지 담아 시간이 느껴지는 프롭으로 제작했습니다."}, {"id": "202511_Ballista", "title": "Ballista", "date": "2025-11", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202511_Ballista/1.jpg", "images": [{"type": "youtube", "id": "w9qQhryEJyo", "thumb": "https://img.youtube.com/vi/w9qQhryEJyo/maxresdefault.jpg"}, "Personal/202511_Ballista/1.jpg", "Personal/202511_Ballista/2.jpg", "Personal/202511_Ballista/3.jpg", "Personal/202511_Ballista/4.jpg", "Personal/202511_Ballista/5.jpg", "Personal/202511_Ballista/6.jpg"], "desc": "공성 병기 발리스타. 거친 목재와 단조 철물의 대비를 살리고 전투의 흔적을 더해 묵직한 무게감을 표현했습니다."}, {"id": "202510_Door", "title": "Door", "date": "2025-10", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202510_Door/1.jpg", "images": ["Personal/202510_Door/1.jpg", "Personal/202510_Door/2.jpg", "Personal/202510_Door/3.jpg", "Personal/202510_Door/4.jpg", "Personal/202510_Door/5.jpg", "Personal/202510_Door/6.jpg", "Personal/202510_Door/7.jpg", "Personal/202510_Door/8.jpg"], "desc": "문 에셋. 낡은 목재와 금속 장식의 질감을 중심으로 작은 디테일까지 손본 프롭입니다."}, {"id": "202508_Substance 3D Designer", "title": "Substance Designer", "date": "2025-08", "category": "DESIGNER", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202508_Substance 3D Designer/1.jpg", "images": ["Personal/202508_Substance 3D Designer/1.jpg", "Personal/202508_Substance 3D Designer/2.jpg", "Personal/202508_Substance 3D Designer/3.jpg", "Personal/202508_Substance 3D Designer/4.jpg", "Personal/202508_Substance 3D Designer/5.jpg", "Personal/202508_Substance 3D Designer/6.jpg", "Personal/202508_Substance 3D Designer/7.jpg", "Personal/202508_Substance 3D Designer/8.jpg", "Personal/202508_Substance 3D Designer/9.jpg", "Personal/202508_Substance 3D Designer/10.jpg", "Personal/202508_Substance 3D Designer/11.jpg", "Personal/202508_Substance 3D Designer/12.jpg"], "desc": "Substance 3D Designer로 만든 절차적(procedural) 머티리얼. 노드 기반으로 패턴과 디테일을 쌓아 타일링 가능한 텍스처로 완성했습니다."}, {"id": "202506_Oceanic restaurant", "title": "Oceanic Restaurant", "date": "2025-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202506_Oceanic restaurant/1.jpg", "images": ["Personal/202506_Oceanic restaurant/1.jpg", "Personal/202506_Oceanic restaurant/2.jpg", "Personal/202506_Oceanic restaurant/3.jpg", "Personal/202506_Oceanic restaurant/4.jpg", "Personal/202506_Oceanic restaurant/5.jpg", "Personal/202506_Oceanic restaurant/6.jpg", "Personal/202506_Oceanic restaurant/7.jpg", "Personal/202506_Oceanic restaurant/8.jpg", "Personal/202506_Oceanic restaurant/9.jpg", "Personal/202506_Oceanic restaurant/10.jpg", "Personal/202506_Oceanic restaurant/11.jpg", "Personal/202506_Oceanic restaurant/12.jpg", "Personal/202506_Oceanic restaurant/13.jpg", "Personal/202506_Oceanic restaurant/14.jpg", "Personal/202506_Oceanic restaurant/15.jpg", "Personal/202506_Oceanic restaurant/16.jpg", "Personal/202506_Oceanic restaurant/17.jpg", "Personal/202506_Oceanic restaurant/18.jpg", "Personal/202506_Oceanic restaurant/19.jpg", "Personal/202506_Oceanic restaurant/20.jpg"], "desc": "바다를 테마로 한 레스토랑 환경. 공간의 무드와 소품 배치, 조명으로 이야기가 담긴 한 장면을 연출했습니다."}, {"id": "202506_Typewriter", "title": "Typewriter", "date": "2025-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202506_Typewriter/1.jpg", "images": [{"type": "youtube", "id": "6bBYDblXAB8", "thumb": "https://img.youtube.com/vi/6bBYDblXAB8/maxresdefault.jpg"}, "Personal/202506_Typewriter/1.jpg", "Personal/202506_Typewriter/2.jpg", "Personal/202506_Typewriter/3.jpg", "Personal/202506_Typewriter/4.jpg", "Personal/202506_Typewriter/5.jpg", "Personal/202506_Typewriter/6.jpg", "Personal/202506_Typewriter/7.jpg", "Personal/202506_Typewriter/8.jpg", "Personal/202506_Typewriter/9.jpg", "Personal/202506_Typewriter/10.jpg"], "desc": "빈티지 타자기 프롭. 금속의 마모와 각인된 글자, 미세한 먼지까지 살려 사실적인 디테일에 집중했습니다."}, {"id": "202505_Fireplace", "title": "Fireplace", "date": "2025-05", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202505_Fireplace/1.jpg", "images": [{"type": "youtube", "id": "WztRE1nu7tA", "thumb": "https://img.youtube.com/vi/WztRE1nu7tA/maxresdefault.jpg"}, "Personal/202505_Fireplace/1.jpg", "Personal/202505_Fireplace/2.jpg", "Personal/202505_Fireplace/3.jpg", "Personal/202505_Fireplace/4.jpg", "Personal/202505_Fireplace/5.jpg"], "desc": "벽난로가 있는 장면. 따뜻한 불빛과 그림자, 오래된 재질감으로 아늑한 분위기를 만들었습니다."}, {"id": "202501_Sci-Fi-Corridor", "title": "Sci-Fi Corridor", "date": "2025-01", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202501_Sci-Fi-Corridor/1.jpg", "images": [{"type": "youtube", "id": "JpXG85YJ32I", "thumb": "https://img.youtube.com/vi/JpXG85YJ32I/maxresdefault.jpg"}, "Personal/202501_Sci-Fi-Corridor/1.jpg", "Personal/202501_Sci-Fi-Corridor/2.jpg", "Personal/202501_Sci-Fi-Corridor/3.jpg", "Personal/202501_Sci-Fi-Corridor/4.jpg", "Personal/202501_Sci-Fi-Corridor/5.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00297.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00300.jpg"], "desc": "SF 콘셉트의 통로 환경. 하드서페이스 모델링과 강한 라이팅 대비로 긴장감 있는 공간을 구성했습니다."}, {"id": "2022_University", "title": "Library", "date": "2022-09", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/2022_University/정면.jpg", "images": ["Personal/2022_University/정면.jpg", "Personal/2022_University/01.png", "Personal/2022_University/02.png", "Personal/2022_University/4.png", "Personal/2022_University/04.PNG", "Personal/2022_University/5.png", "Personal/2022_University/6.png", "Personal/2022_University/45.png", "Personal/2022_University/46.png", "Personal/2022_University/47.png", "Personal/2022_University/48.PNG", "Personal/2022_University/49.png", "Personal/2022_University/452.png", "Personal/2022_University/2021470008.jpg", "Personal/2022_University/2021470008_전혜민.png", "Personal/2022_University/서고2.png"], "desc": "도서관을 주제로 한 과제 작업. 방대한 서가와 디테일한 소품을 배치하고 라이팅으로 깊이 있는 분위기를 완성했습니다."}];
+const PROJECTS = [{"id": "202605_Rock", "title": "Rock Material Study", "date": "2026-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202605_Rock/1.png", "images": ["Personal/202605_Rock/1.png", "Personal/202605_Rock/2.png", "Personal/202605_Rock/3.jpg", "Personal/202605_Rock/4.jpg", "Personal/202605_Rock/5.jpg", "Personal/202605_Rock/6.jpg", "Personal/202605_Rock/7.jpg", "Personal/202605_Rock/8.jpg", "Personal/202605_Rock/9.jpg", "Personal/202605_Rock/10.jpg", "Personal/202605_Rock/11.jpg", "Personal/202605_Rock/12.jpg", "Personal/202605_Rock/13.jpg", "Personal/202605_Rock/14.jpg", "Personal/202605_Rock/15.jpg", "Personal/202605_Rock/16.jpg", "Personal/202605_Rock/17.png"], "desc": "ZBrush로 스컬핑하고 Substance로 다듬은 바위 머티리얼 연구. 균열과 이끼, 마모된 표면을 PBR 텍스처로 표현하고 언리얼에서 라이팅으로 마무리했습니다."}, {"id": "202602_Prop", "title": "Props", "date": "2026-02", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202602_Prop/1.jpg", "images": ["Personal/202602_Prop/1.jpg", "Personal/202602_Prop/2.jpg", "Personal/202602_Prop/3.jpg", "Personal/202602_Prop/4.jpg", "Personal/202602_Prop/5.jpg", "Personal/202602_Prop/6.jpg", "Personal/202602_Prop/7.jpg", "Personal/202602_Prop/8.jpg", "Personal/202602_Prop/9.jpg", "Personal/202602_Prop/10.jpg", "Personal/202602_Prop/11.jpg", "Personal/202602_Prop/12.jpg", "Personal/202602_Prop/13.jpg", "Personal/202602_Prop/14.jpg", "Personal/202602_Prop/15.jpg", "Personal/202602_Prop/16.jpg", "Personal/202602_Prop/17.png", "Personal/202602_Prop/18.jpg", "Personal/202602_Prop/19.jpg", "Personal/202602_Prop/20.jpg", "Personal/202602_Prop/21.jpg", "Personal/202602_Prop/22.jpg", "Personal/202602_Prop/23.jpg", "Personal/202602_Prop/24.jpg", "Personal/202602_Prop/25.jpg", "Personal/202602_Prop/26.jpg"], "desc": "게임에 쓰일 소품 세트. 보관함과 오브제를 모델링·텍스처링하고, 낡은 금속과 나무의 질감을 살려 하나의 묶음으로 완성했습니다."}, {"id": "202511_Carriage", "title": "Carriage", "date": "2025-11", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202511_Carriage/2.jpg", "images": [{"type": "youtube", "id": "S3YrEdIoGwo", "thumb": "https://img.youtube.com/vi/S3YrEdIoGwo/maxresdefault.jpg"}, "Personal/202511_Carriage/2.jpg", "Personal/202511_Carriage/2(1).jpg", "Personal/202511_Carriage/2(2).jpg", "Personal/202511_Carriage/2(3).jpg", "Personal/202511_Carriage/2(4).jpg", "Personal/202511_Carriage/2(5).jpg", "Personal/202511_Carriage/6 (3).png", "Personal/202511_Carriage/aeaedd__(7)0003_Ultra.jpg", "Personal/202511_Carriage/aeaedd__(8)0002_Ultra.jpg"], "desc": "오래된 목재 마차. 풍화된 나뭇결과 녹슨 철물, 쌓인 흙먼지까지 담아 시간이 느껴지는 프롭으로 제작했습니다."}, {"id": "202511_Ballista", "title": "Ballista", "date": "2025-11", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202511_Ballista/1.jpg", "images": [{"type": "youtube", "id": "w9qQhryEJyo", "thumb": "https://img.youtube.com/vi/w9qQhryEJyo/maxresdefault.jpg"}, "Personal/202511_Ballista/1.jpg", "Personal/202511_Ballista/2.jpg", "Personal/202511_Ballista/3.jpg", "Personal/202511_Ballista/4.jpg", "Personal/202511_Ballista/5.jpg", "Personal/202511_Ballista/6.jpg"], "desc": "공성 병기 발리스타. 거친 목재와 단조 철물의 대비를 살리고 전투의 흔적을 더해 묵직한 무게감을 표현했습니다."}, {"id": "202510_Door", "title": "Door", "date": "2025-10", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202510_Door/1.jpg", "images": ["Personal/202510_Door/1.jpg", "Personal/202510_Door/2.jpg", "Personal/202510_Door/3.jpg", "Personal/202510_Door/4.jpg", "Personal/202510_Door/5.jpg", "Personal/202510_Door/6.jpg", "Personal/202510_Door/7.jpg", "Personal/202510_Door/8.jpg"], "desc": "문 에셋. 낡은 목재와 금속 장식의 질감을 중심으로 작은 디테일까지 손본 프롭입니다."}, {"id": "202508_Substance 3D Designer", "title": "Substance Designer", "date": "2025-08", "category": "DESIGNER", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202508_Substance 3D Designer/1.jpg", "images": ["Personal/202508_Substance 3D Designer/1.jpg", "Personal/202508_Substance 3D Designer/2.jpg", "Personal/202508_Substance 3D Designer/3.jpg", "Personal/202508_Substance 3D Designer/4.jpg", "Personal/202508_Substance 3D Designer/5.jpg", "Personal/202508_Substance 3D Designer/6.jpg", "Personal/202508_Substance 3D Designer/7.jpg", "Personal/202508_Substance 3D Designer/8.jpg", "Personal/202508_Substance 3D Designer/9.jpg", "Personal/202508_Substance 3D Designer/10.jpg", "Personal/202508_Substance 3D Designer/11.jpg", "Personal/202508_Substance 3D Designer/12.jpg"], "desc": "Substance 3D Designer로 만든 절차적(procedural) 머티리얼. 노드 기반으로 패턴과 디테일을 쌓아 타일링 가능한 텍스처로 완성했습니다."}, {"id": "202506_Oceanic restaurant", "title": "Oceanic Restaurant", "date": "2025-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202506_Oceanic restaurant/1.jpg", "images": ["Personal/202506_Oceanic restaurant/1.jpg", "Personal/202506_Oceanic restaurant/2.jpg", "Personal/202506_Oceanic restaurant/3.jpg", "Personal/202506_Oceanic restaurant/4.jpg", "Personal/202506_Oceanic restaurant/5.jpg", "Personal/202506_Oceanic restaurant/6.jpg", "Personal/202506_Oceanic restaurant/7.jpg", "Personal/202506_Oceanic restaurant/8.jpg", "Personal/202506_Oceanic restaurant/9.jpg", "Personal/202506_Oceanic restaurant/10.jpg", "Personal/202506_Oceanic restaurant/11.jpg", "Personal/202506_Oceanic restaurant/12.jpg", "Personal/202506_Oceanic restaurant/13.jpg", "Personal/202506_Oceanic restaurant/14.jpg", "Personal/202506_Oceanic restaurant/15.jpg", "Personal/202506_Oceanic restaurant/16.jpg", "Personal/202506_Oceanic restaurant/17.jpg", "Personal/202506_Oceanic restaurant/18.jpg", "Personal/202506_Oceanic restaurant/19.jpg", "Personal/202506_Oceanic restaurant/20.jpg"], "desc": "바다를 테마로 한 레스토랑 환경. 공간의 무드와 소품 배치, 조명으로 이야기가 담긴 한 장면을 연출했습니다."}, {"id": "202506_Typewriter", "title": "Typewriter", "date": "2025-06", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202506_Typewriter/1.jpg", "images": [{"type": "youtube", "id": "6bBYDblXAB8", "thumb": "https://img.youtube.com/vi/6bBYDblXAB8/maxresdefault.jpg"}, "Personal/202506_Typewriter/1.jpg", "Personal/202506_Typewriter/2.jpg", "Personal/202506_Typewriter/3.jpg", "Personal/202506_Typewriter/4.jpg", "Personal/202506_Typewriter/5.jpg", "Personal/202506_Typewriter/6.jpg", "Personal/202506_Typewriter/7.jpg", "Personal/202506_Typewriter/8.jpg", "Personal/202506_Typewriter/9.jpg", "Personal/202506_Typewriter/10.jpg"], "desc": "빈티지 타자기 프롭. 금속의 마모와 각인된 글자, 미세한 먼지까지 살려 사실적인 디테일에 집중했습니다."}, {"id": "202505_Fireplace", "title": "Fireplace", "date": "2025-05", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202505_Fireplace/1.jpg", "images": [{"type": "youtube", "id": "WztRE1nu7tA", "thumb": "https://img.youtube.com/vi/WztRE1nu7tA/maxresdefault.jpg"}, "Personal/202505_Fireplace/1.jpg", "Personal/202505_Fireplace/2.jpg", "Personal/202505_Fireplace/3.jpg", "Personal/202505_Fireplace/4.jpg", "Personal/202505_Fireplace/5.jpg"], "desc": "벽난로가 있는 장면. 따뜻한 불빛과 그림자, 오래된 재질감으로 아늑한 분위기를 만들었습니다."}, {"id": "202501_Sci-Fi-Corridor", "title": "Sci-Fi Corridor", "date": "2025-01", "category": "PERSONAL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/202501_Sci-Fi-Corridor/1.jpg", "images": [{"type": "youtube", "id": "JpXG85YJ32I", "thumb": "https://img.youtube.com/vi/JpXG85YJ32I/maxresdefault.jpg"}, "Personal/202501_Sci-Fi-Corridor/1.jpg", "Personal/202501_Sci-Fi-Corridor/2.jpg", "Personal/202501_Sci-Fi-Corridor/3.jpg", "Personal/202501_Sci-Fi-Corridor/4.jpg", "Personal/202501_Sci-Fi-Corridor/5.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00297.jpg", "Personal/202501_Sci-Fi-Corridor/HighresScreenshot00300.jpg"], "desc": "SF 콘셉트의 통로 환경. 하드서페이스 모델링과 강한 라이팅 대비로 긴장감 있는 공간을 구성했습니다."}, {"id": "2022_University", "title": "School", "date": "2022-09", "category": "SCHOOL", "tools": ["3ds Max", "ZBrush", "Substance", "UE5"], "cover": "Personal/2022_University/정면.jpg", "images": ["Personal/2022_University/정면.jpg", "Personal/2022_University/01.png", "Personal/2022_University/02.png", "Personal/2022_University/4.png", "Personal/2022_University/04.PNG", "Personal/2022_University/5.png", "Personal/2022_University/6.png", "Personal/2022_University/45.png", "Personal/2022_University/46.png", "Personal/2022_University/47.png", "Personal/2022_University/48.PNG", "Personal/2022_University/49.png", "Personal/2022_University/452.png", "Personal/2022_University/2021470008.jpg", "Personal/2022_University/2021470008_전혜민.png", "Personal/2022_University/서고2.png"], "desc": "한 학기 과제로 진행한 환경 작업. 공간을 직접 구성하고 소품과 라이팅까지 다듬어 하나의 장면으로 완성했습니다."}];
 const BASELINE = {"2022_University": 7, "202501_Sci-Fi-Corridor": 88, "202505_Fireplace": 120, "202506_Oceanic restaurant": 96, "202506_Typewriter": 44, "202508_Substance 3D Designer": 73, "202511_Ballista": 38, "202511_Carriage": 51, "202510_Door": 4, "202602_Prop": 142, "202605_Rock": 9};       // editable seed counts
 const EMAIL = "7120mh@naver.com";
 const CAT_LABEL = {ALL:"All", PERSONAL:"Personal", DESIGNER:"Designer", PROFESSIONAL:"Professional", SKETCH:"Sketch", RELIGHT:"Re:Lighting"};
@@ -323,47 +376,55 @@ let pos=0;        // index into flat for lightbox
 function catProjects(cat){return cat==='ALL'?PROJECTS:PROJECTS.filter(p=>p.category===cat);}
 function catCount(cat){return catProjects(cat).length;}
 
-/* ---- filters ---- */
-function buildFilters(){
-  const f=$('#filters');f.innerHTML='';
-  CAT_ORDER.forEach(cat=>{
-    const n=catCount(cat);
-    if(cat!=='ALL'&&n===0)return;           // hide empty categories
-    const b=document.createElement('button');
-    b.className='fchip'+(cat===activeCat?' active':'');
-    b.innerHTML=CAT_LABEL[cat]+' <span class="n">'+(cat==='ALL'?PROJECTS.length:n)+'</span>';
-    b.onclick=()=>{activeCat=cat;buildFilters();renderGrid();};
-    f.appendChild(b);
-  });
-}
-
-/* ---- grid ---- */
+/* ---- category sections (Work / Designer / School) ---- */
+const SECTIONS=[
+  {cat:"PERSONAL", title:"Work",     eyebrow:"Environment & Prop", desc:"게임을 위한 환경과 프롭 — 모델링부터 라이팅까지 직접 작업합니다."},
+  {cat:"DESIGNER", title:"Designer", eyebrow:"Procedural Material", desc:"Substance 3D Designer로 만든 절차적 머티리얼 스터디."},
+  {cat:"SCHOOL",   title:"School",   eyebrow:"School Work",         desc:"학교 과제로 진행한 작업입니다."},
+];
 let io;
-function renderGrid(){
-  const grid=$('#grid'), empty=$('#emptyState');
-  const list=catProjects(activeCat);
-  grid.innerHTML='';
-  $('#workCount').textContent='['+String(list.length).padStart(2,'0')+'] '+CAT_LABEL[activeCat].toUpperCase();
-  if(!list.length){grid.style.display='none';empty.style.display='block';
-    empty.textContent='// '+CAT_LABEL[activeCat]+' — work landing here soon.';return;}
-  grid.style.display='grid';empty.style.display='none';
-  list.forEach(p=>{
-    const v=viewsOf(p.id);
-    const card=document.createElement('div');
-    card.className='card';
-    card.innerHTML=`
-      <div class="tags">
-        ${isNew(p.date)?'<span class="tag new">NEW</span>':''}
-        ${v>=10?'<span class="tag views">'+v+'</span>':''}
-      </div>
-      <div class="ph"><img loading="lazy" src="${enc(p.cover)}" alt="${p.title}"></div>
-      <div class="info">
-        <div class="date">${fmtDate(p.date)}</div>
-        <div class="title">${p.title}<span class="cat">${p.category}</span></div>
+function cardEl(p,catTitle){
+  const v=viewsOf(p.id);
+  const card=document.createElement('div');
+  card.className='card';
+  card.innerHTML=`
+    <div class="tags">
+      ${isNew(p.date)?'<span class="tag new">NEW</span>':''}
+      ${v>=10?'<span class="tag views">'+v+'</span>':''}
+    </div>
+    <div class="ph"><img loading="lazy" src="${enc(p.cover)}" alt="${p.title}"></div>
+    <div class="info">
+      <div class="date">${fmtDate(p.date)}</div>
+      <div class="title">${p.title}<span class="cat">${catTitle}</span></div>
+    </div>`;
+  card.onclick=()=>openLightbox(p.id);
+  if(io)io.observe(card);
+  return card;
+}
+function renderSections(){
+  const root=$('#sections'); root.innerHTML='';
+  SECTIONS.forEach(s=>{
+    const list=PROJECTS.filter(p=>p.category===s.cat);
+    if(!list.length) return;
+    const sec=document.createElement('section');
+    sec.className='cat-sec'; sec.id='sec-'+s.cat;
+    sec.innerHTML=`
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-left">
+            <div class="sec-eyebrow">${s.eyebrow}</div>
+            <h2 class="sec-title">${s.title}</h2>
+          </div>
+          <div class="sec-right">
+            <div class="sec-count">${String(list.length).padStart(2,'0')} PROJECTS</div>
+            <div class="sec-desc">${s.desc}</div>
+          </div>
+        </div>
+        <div class="grid"></div>
       </div>`;
-    card.onclick=()=>openLightbox(p.id);
-    grid.appendChild(card);
-    if(io)io.observe(card);
+    const grid=sec.querySelector('.grid');
+    list.forEach(p=>grid.appendChild(cardEl(p,s.title)));
+    root.appendChild(sec);
   });
 }
 
@@ -380,7 +441,7 @@ function openLightbox(projId){
   buildRail();
   show();
 }
-function closeLightbox(){$('#lb').classList.remove('open');document.body.style.overflow='';renderGrid();}
+function closeLightbox(){$('#lb').classList.remove('open');document.body.style.overflow='';}
 let curProj=null;
 function show(){
   const item=flat[pos];if(!item)return;
@@ -470,35 +531,47 @@ $('#email-nav').onclick=e=>{e.preventDefault();copyEmail();};
 
 /* ---- nav ---- */
 function goAbout(){window.scrollTo({top:0,behavior:'smooth'});setMenu(false);}
-$$('#navlinks a[data-cat]').forEach(a=>a.onclick=e=>{
-  e.preventDefault();activeCat=a.dataset.cat;buildFilters();renderGrid();
-  $('#work').scrollIntoView({behavior:'smooth'});setMenu(false);
+$$('#navlinks a[data-jump]').forEach(a=>a.onclick=e=>{
+  e.preventDefault();
+  const el=document.getElementById('sec-'+a.dataset.jump);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  setMenu(false);
 });
-$$('#navlinks a[data-nav]').forEach(a=>a.onclick=()=>setMenu(false));
 function setMenu(v){$('#nav').classList.toggle('menu-open',v);}
 $('#menuBtn').onclick=()=>setMenu(!$('#nav').classList.contains('menu-open'));
 
 /* active nav + back-to-top on scroll */
-const aboutEl=$('#about'),workEl=$('#work');
 window.addEventListener('scroll',()=>{
   const y=window.scrollY;
   $('#totop').classList.toggle('show',y>600);
-  const inWork=y> (workEl.offsetTop-120);
-  $$('#navlinks a[data-nav]').forEach(a=>a.classList.toggle('active',
-    (a.dataset.nav==='work')===inWork));
+  let cur=null;
+  SECTIONS.forEach(s=>{const el=document.getElementById('sec-'+s.cat);
+    if(el && y+150>=el.offsetTop) cur=s.cat;});
+  $$('#navlinks a[data-jump]').forEach(a=>a.classList.toggle('active',a.dataset.jump===cur));
 },{passive:true});
 $('#totop').onclick=goAbout;
 
 /* reveal on scroll */
 io=new IntersectionObserver((es)=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.08});
 
+/* ---- hero background video ---- */
+const HERO_VIDEO="JpXG85YJ32I";   // 인트로 배경 영상 (다른 영상 ID로 바꾸면 교체됨)
+const HERO_FEAT="Sci-Fi Corridor";
+function initHeroBg(){
+  const bg=$('#heroBg');
+  if(bg&&HERO_VIDEO){
+    bg.innerHTML=`<iframe src="https://www.youtube.com/embed/${HERO_VIDEO}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO}&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&showinfo=0" allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
+  }
+  const f=$('#heroFeat'); if(f) f.innerHTML=`<span>Featured</span><b>${HERO_FEAT}</b>`;
+}
+
 /* init */
 function init(){
   $('#yr').textContent=new Date().getFullYear();
   $('#projCount').textContent=PROJECTS.length+' PROJECTS';
-  const tset=[...new Set(PROJECTS.flatMap(p=>p.tools||[]))];
   $('#aboutTools').innerHTML=["3ds Max","ZBrush","Substance Painter","Substance Designer","Marmoset","Unreal Engine 5"].map(t=>`<span class="chip">${t}</span>`).join('');
-  buildFilters();renderGrid();
+  initHeroBg();
+  renderSections();
 }
 init();
 </script>
