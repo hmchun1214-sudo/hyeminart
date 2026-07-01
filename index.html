@@ -155,7 +155,7 @@ footer{border-top:1px solid var(--line);padding:7vh 0 6vh;margin-top:2vh}
 .lb-tools{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .lb-tools span{font-family:var(--mono);font-size:10px;color:var(--faint);border:1px solid var(--line);border-radius:5px;padding:3px 7px}
 .lb-count{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.1em;border-top:1px solid var(--line);padding-top:12px;margin-bottom:10px}
-.lb-rail{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:9px;padding:38vh 4px;scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.lb-rail{overflow-y:auto;flex:1;position:relative;display:flex;flex-direction:column;gap:9px;padding:6px 4px;scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
 .lb-rail::-webkit-scrollbar{width:6px}.lb-rail::-webkit-scrollbar-thumb{background:var(--line2);border-radius:3px}
 .lb-rail .th{aspect-ratio:16/10;border-radius:7px;overflow:hidden;cursor:pointer;border:2px solid transparent;flex-shrink:0;position:relative;background:var(--bg3)}
 .lb-rail .th img{width:100%;height:100%;object-fit:cover}
@@ -165,7 +165,7 @@ footer{border-top:1px solid var(--line);padding:7vh 0 6vh;margin-top:2vh}
   #lb{flex-direction:column}
   .lb-stage{flex:1}
   .lb-side{width:100%;height:38vh;border-left:0;border-top:1px solid var(--line)}
-  .lb-rail{flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:0 40vw}
+  .lb-rail{flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:0 6px}
   .lb-rail .th{width:120px;height:76px;aspect-ratio:auto}
   .lb-arrow{width:44px;height:44px}
 }
@@ -374,9 +374,7 @@ function renderWork(){
   if(feat){
     const el=document.createElement('div');
     el.className='feat';
-    el.innerHTML=`<div class="ftag">Featured</div>
-      <img src="${enc(feat.cover)}" alt="${feat.title}">
-      <div class="fcap"><h3>${feat.title}</h3><div class="d">${feat.desc}</div></div>`;
+    el.innerHTML=`<img src="${enc(feat.cover)}" alt="${feat.title}">`;
     el.onclick=()=>openLightbox(feat.id,0);
     fw.appendChild(el);
   }
@@ -468,10 +466,13 @@ function show(){
 function centerRail(){
   const active=$('#lbRail .th.active'), rail=$('#lbRail');
   if(!active||!rail)return;
+  const rr=rail.getBoundingClientRect(), ar=active.getBoundingClientRect();
   if(window.innerWidth<=900){
-    rail.scrollTo({left:active.offsetLeft-rail.clientWidth/2+active.clientWidth/2,behavior:'smooth'});
+    const delta=(ar.left-rr.left)-(rail.clientWidth/2-active.clientWidth/2);
+    rail.scrollTo({left:rail.scrollLeft+delta,behavior:'smooth'});
   }else{
-    rail.scrollTo({top:active.offsetTop-rail.clientHeight/2+active.clientHeight/2,behavior:'smooth'});
+    const delta=(ar.top-rr.top)-(rail.clientHeight/2-active.clientHeight/2);
+    rail.scrollTo({top:rail.scrollTop+delta,behavior:'smooth'});
   }
 }
 function step(d){pos=(pos+d+flat.length)%flat.length;show();}
@@ -484,6 +485,7 @@ function projStep(d){
 let wheelLock=false;
 function wheelNav(dy){if(wheelLock)return;wheelLock=true;step(dy>0?1:-1);setTimeout(()=>wheelLock=false,240);}
 $('#lbStage').addEventListener('wheel',e=>{e.preventDefault();wheelNav(e.deltaY);},{passive:false});
+$('#lbRail').addEventListener('wheel',e=>{e.preventDefault();wheelNav(e.deltaY);},{passive:false});
 
 /* arrows = prev/next PROJECT */
 $('#lbPrev').onclick=()=>projStep(-1);
@@ -539,7 +541,7 @@ function initHero(){
 }
 
 /* ---------- nav / misc ---------- */
-function scrollTop(){window.scrollTo({top:0,behavior:'smooth'});}
+function scrollTop(){location.reload();}
 function jumpTo(key){
   if(key==='about'){$('#about').scrollIntoView({behavior:'smooth'});return;}
   const el=document.getElementById('sec-'+key); if(el)el.scrollIntoView({behavior:'smooth'});
