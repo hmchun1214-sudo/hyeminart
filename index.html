@@ -79,6 +79,7 @@ main{padding-top:2vh}
 .feat .fcap h3{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,46px);margin:0;letter-spacing:-.02em}
 .feat .fcap .d{font-family:var(--body);color:var(--dim);font-size:14px;margin-top:6px;max-width:640px}
 .feat .ftag{position:absolute;top:16px;left:18px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--ember-ink);background:rgba(0,0,0,.45);border:1px solid rgba(240,165,88,.5);padding:5px 10px;border-radius:999px}
+.feat .fdate{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:18px 22px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.72))}
 @media(max-width:700px){.feat{aspect-ratio:4/3}}
 
 .mason{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
@@ -90,12 +91,12 @@ main{padding-top:2vh}
 .mcard .tags{position:absolute;top:10px;left:10px;z-index:3;display:flex;gap:6px}
 .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:3px 7px;border-radius:5px;background:rgba(0,0,0,.55);color:#fff}
 .tag.new{background:var(--ember);color:#160f07;font-weight:700}
-.mcard .mcap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.82));opacity:0;transition:opacity .3s}
-.mcard:hover .mcap{opacity:1}
-.mcard .mcap .t{font-family:var(--disp);font-weight:800;font-size:18px;color:#fff}
-.mcard .mcap .dt{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-top:2px}
+.mcard .mcap,.feat .mcap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.82));opacity:0;transition:opacity .3s}
+.mcard:hover .mcap,.feat:hover .mcap{opacity:1}
+.mcard .mcap .t,.feat .mcap .t{font-family:var(--disp);font-weight:800;font-size:18px;color:#fff}
+.mcard .mcap .dt,.feat .mcap .dt{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-top:2px}
 .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;width:52px;height:52px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;pointer-events:none}
-@media(hover:none){.mcard .mcap{opacity:1}}
+@media(hover:none){.mcard .mcap,.feat .mcap{opacity:1}}
 
 /* DESIGNER: square tiles */
 .dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
@@ -360,7 +361,7 @@ const FEATURED_ID="202607_Desert";
 const enc=p=>/^(https?:)?\/\//.test(p)?p:p.split('/').map(encodeURIComponent).join('/');
 const viewsOf=id=>BASELINE[id]||0;
 function isNew(d){const dd=new Date(d+'-01');const now=new Date();return (now-dd)/(1000*3600*24)<95;}
-function fmtDate(d){const[y,m]=d.split('-');return ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][+m-1]+' '+y;}
+function fmtDate(d){const[y,m]=d.split('-');return m+' '+y;}
 const thumbOf=m=>typeof m==='string'?m:(m.thumb||'');
 const isVid=m=>typeof m!=='string'&&m.type==='youtube';
 
@@ -374,7 +375,8 @@ function renderWork(){
   if(feat){
     const el=document.createElement('div');
     el.className='feat';
-    el.innerHTML=`<img src="${enc(feat.cover)}" alt="${feat.title}">`;
+    el.innerHTML=`<img src="${enc(feat.cover)}" alt="${feat.title}">
+      <div class="mcap"><div class="t">${feat.title}</div><div class="dt">${fmtDate(feat.date)}</div></div>`;
     el.onclick=()=>openLightbox(feat.id,0);
     fw.appendChild(el);
   }
@@ -427,7 +429,8 @@ function openLightbox(id,imgIdx){
 function closeLightbox(){$('#lb').classList.remove('open');document.body.style.overflow='';$('#lbMedia').innerHTML='';}
 function fillSide(p){
   $('#lbTitle').textContent=p.title;
-  $('#lbMeta').innerHTML=`${fmtDate(p.date)}<span class="sep">/</span>${p.category==='DESIGNER'?'DESIGNER':'WORK'}`;
+  const[dy,dm]=p.date.split('-');
+  $('#lbMeta').innerHTML=`${dm} ${dy}<span class="sep">/</span>${p.category==='DESIGNER'?'DESIGNER':'WORK'}`;
   $('#lbDesc').textContent=p.desc||'';
   $('#lbTools').innerHTML=(p.tools||[]).map(t=>`<span>${t}</span>`).join('');
   const imgN=p.images.filter(m=>typeof m==='string').length;
