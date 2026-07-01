@@ -184,7 +184,7 @@ footer{border-top:1px solid var(--line);padding:7vh 0 6vh;margin-top:2vh}
 <body>
 
 <nav class="nav">
-  <div class="brand" onclick="scrollTop()"><b>chun hyemin</b><span>전혜민</span></div>
+  <div class="brand" id="brand"><b>chun hyemin</b><span>전혜민</span></div>
   <button class="menu-btn" id="menuBtn">☰</button>
   <div class="navlinks" id="navlinks">
     <a data-jump="PERSONAL">Work</a>
@@ -542,6 +542,7 @@ function initHero(){
 
 /* ---------- nav / misc ---------- */
 function scrollTop(){location.reload();}
+$('#brand').addEventListener('click',()=>location.reload());
 function jumpTo(key){
   if(key==='about'){$('#about').scrollIntoView({behavior:'smooth'});return;}
   const el=document.getElementById('sec-'+key); if(el)el.scrollIntoView({behavior:'smooth'});
@@ -564,6 +565,8 @@ window.addEventListener('scroll',()=>{
 
 /* init */
 function init(){
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  window.scrollTo(0,0);
   $('#yr').textContent=new Date().getFullYear();
   $('#projCount').innerHTML='Projects — <b>'+PROJECTS.length+'</b>';
   $('#aboutTools').innerHTML=["3ds Max","ZBrush","Substance Painter","Substance Designer","Marmoset","Unreal Engine 5"].map(t=>`<span class="chip">${t}</span>`).join('');
@@ -572,6 +575,7 @@ function init(){
   renderDesigner();
 }
 init();
+window.addEventListener('load',()=>window.scrollTo(0,0));
 </script>
 </body>
 </html>
