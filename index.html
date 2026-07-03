@@ -452,9 +452,9 @@ function show(){
   const m=flat[pos], media=$('#lbMedia');
   if(isVid(m)){
     media.innerHTML=`<div class="ytwrap">
-      <iframe id="ytFrame" src="https://www.youtube.com/embed/${m.id}?rel=0&vq=hd1080&modestbranding=1&playsinline=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="ytFrame" src="https://www.youtube.com/embed/${m.id}?autoplay=1&mute=1&rel=0&vq=hd1080&modestbranding=1&playsinline=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       <div class="ytcatch" id="ytCatch" title="클릭: 재생/정지 · 휠: 사진 넘김"></div></div>`;
-    let playing=false;
+    let playing=true;
     const cmd=fn=>{const f=$('#ytFrame');if(f&&f.contentWindow)f.contentWindow.postMessage(JSON.stringify({event:'command',func:fn,args:[]}),'*');};
     const c=$('#ytCatch');
     c.addEventListener('wheel',e=>{e.preventDefault();wheelNav(e.deltaY);},{passive:false});
