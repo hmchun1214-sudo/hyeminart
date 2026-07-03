@@ -312,7 +312,7 @@ function P(o){
     cover:base+o.cover,desc:o.desc||'',video:o.video||null,images:media};
 }
 const PROJECTS=[
- P({id:"202607_Desert",title:"Desert",date:"2026-07",cat:"PERSONAL",cover:"NewLevelSequence__(19)0004_Ultra.png",
+ P({id:"202607_Desert",title:"Desert",date:"2026-07",cat:"PERSONAL",video:"aFk8BvfBDqs",cover:"NewLevelSequence__(19)0004_Ultra.png",
     desc:"사막을 배경으로 한 환경 작업. 지형과 오브젝트를 배치하고 언리얼에서 라이팅과 분위기를 잡았습니다.",
     imgs:["NewLevelSequence__(19)0004_Ultra.png","NewLevelSequence__(20)0003_Ultra.png","NewLevelSequence__(20)0004_Ultra.png","NewLevelSequence__(21)0002_Ultra.png","NewLevelSequence__(21)0003_Ultra.png","NewLevelSequence__(22)0001_Ultra.png","NewLevelSequence__(22)0002_Ultra.png","NewLevelSequence__(24)0001_Ultra.png"]}),
  P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"1.png",
@@ -376,6 +376,7 @@ function renderWork(){
     const el=document.createElement('div');
     el.className='feat';
     el.innerHTML=`<img src="${enc(feat.cover)}" alt="${feat.title}">
+      ${feat.video?'<div class="play">▶</div>':''}
       <div class="mcap"><div class="t">${feat.title}</div><div class="dt">${fmtDate(feat.date)}</div></div>`;
     el.onclick=()=>openLightbox(feat.id,0);
     fw.appendChild(el);
@@ -537,7 +538,7 @@ function attachZoom(img){
 }
 
 /* ---------- hero video ---------- */
-const HERO_VIDEO="JpXG85YJ32I", HERO_FEAT="Sci-Fi Corridor";
+const HERO_VIDEO="aFk8BvfBDqs", HERO_FEAT="Desert";
 function initHero(){
   $('#heroBg').innerHTML=`<iframe src="https://www.youtube.com/embed/${HERO_VIDEO}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO}&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&showinfo=0" allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
   $('#heroFeat').innerHTML=`<span>Featured</span><b>${HERO_FEAT}</b>`;
