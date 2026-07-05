@@ -8,7 +8,7 @@
 <meta name="description" content="Portfolio of chun hyemin (전혜민) — 3D environment & prop artist. Modeling, sculpting, texturing, and lighting for games.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0d0e10; --bg2:#141619; --bg3:#1b1e22;
@@ -16,13 +16,13 @@
   --ink:#ece8e1; --dim:#9a9ca1; --faint:#5f6268;
   --ember:#cb7a31; --ember-ink:#f0a558; --ember-soft:rgba(203,122,49,.14);
   --disp:'Archivo',-apple-system,system-ui,sans-serif;
-  --body:'Inter',-apple-system,system-ui,sans-serif;
+  --body:'Inter','Noto Sans KR',-apple-system,system-ui,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
   --nav-h:64px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 ::selection{background:var(--ember);color:#1a120a}
@@ -182,6 +182,11 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
   .hero-feat{display:none}
   .sec-right{text-align:left;max-width:none}
 }
+#toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(12px);z-index:200;
+  background:var(--ember);color:#160f07;font-family:var(--mono);font-size:12.5px;font-weight:700;
+  padding:11px 18px;border-radius:9px;box-shadow:0 12px 34px rgba(0,0,0,.5);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -205,7 +210,7 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
     <p class="hero-sub">전혜민 · 3D 아티스트</p>
     <div class="hero-cta">
       <a class="btn solid" data-jump="PERSONAL">작업 보기 ↓</a>
-      <button class="btn" id="heroContact">✉ Contact</button>
+      <button class="btn" id="heroContact">✉ 7120mh@naver.com</button>
     </div>
   </div>
   <div class="hero-feat" id="heroFeat"></div>
@@ -250,9 +255,9 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
     <div class="wrap">
       <div class="sec-eyebrow">About</div>
       <div class="about-grid">
-        <div class="about-photo"><img src="Icon/profile.jpg" alt="chun hyemin" onerror="this.parentElement.style.display='none'"></div>
+        <div class="about-photo"><img id="profileImg" alt="chun hyemin"></div>
         <div>
-          <p class="about-lead">환경과 프롭을 중심으로 작업하는 <b>3D 아티스트</b>입니다. 레퍼런스 분석과 블록아웃에서 시작해 모델링·스컬핑·텍스처링·라이팅까지 전 과정을 직접 다루며, 작은 소품의 재질과 디테일까지 신경 써 실제 게임에 쓸 수 있는 완성도로 마무리합니다.</p>
+          <p class="about-lead">환경과 프롭을 중심으로 작업하는 3D 아티스트입니다. 레퍼런스 분석과 블록아웃에서 시작해 모델링·스컬핑·텍스처링·라이팅까지 전 과정을 직접 다루며, 작은 소품의 재질과 디테일까지 신경 써 실제 게임에 쓸 수 있는 완성도로 마무리합니다.</p>
         </div>
         <div>
           <p class="about-label">Tools</p>
@@ -313,9 +318,9 @@ function P(o){
     cover:base+o.cover,desc:o.desc||'',video:o.video||null,images:media};
 }
 const PROJECTS=[
- P({id:"202607_Desert",title:"Desert",date:"2026-07",cat:"PERSONAL",video:"aFk8BvfBDqs",cover:"NewLevelSequence__(19)0004_Ultra.png",
-    desc:"사막을 배경으로 한 환경 작업. 지형과 오브젝트를 배치하고 언리얼에서 라이팅과 분위기를 잡았습니다.",
-    imgs:["NewLevelSequence__(19)0004_Ultra.png"]}),
+ P({id:"202607_Tent",title:"Tent",date:"2026-07",cat:"PERSONAL",video:"5DyMcMQkZRA",cover:"1.jpg",
+    desc:"사막 위 텐트를 중심으로 한 환경 작업. 천막의 재질과 소품을 배치하고 언리얼에서 라이팅과 분위기를 잡았습니다.",
+    imgs:["1.jpg","2.jpg","5.jpg","6.jpg","9.jpg","10.jpg","11.jpg","12.jpg","13.jpg"]}),
  P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"1.png",
     desc:"ZBrush로 스컬핑하고 Substance로 다듬은 바위 머티리얼 연구. 균열과 이끼, 마모된 표면을 PBR 텍스처로 표현하고 언리얼에서 라이팅으로 마무리했습니다.",
     imgs:["1.png","2.png"].concat(seq(3,16),["17.png"])}),
@@ -353,10 +358,10 @@ const PROJECTS=[
     desc:"Substance 3D Designer로 만든 절차적 머티리얼 스터디.",
     imgs:seq(1,12)}),
 ];
-const BASELINE={"202607_Desert":6,"202605_Rock":9,"202604_Prop":12,"202602_Prop":142,"202511_Carriage":51,"202511_Ballista":38,"202510_Door":10,"202506_Typewriter":44,"202506_Oceanic restaurant":96,"202505_Fireplace":120,"202501_Sci-Fi-Corridor":88,"2022_University":7,"202508_Substance 3D Designer":73};
+const BASELINE={"202607_Tent":6,"202605_Rock":9,"202604_Prop":12,"202602_Prop":142,"202511_Carriage":51,"202511_Ballista":38,"202510_Door":10,"202506_Typewriter":44,"202506_Oceanic restaurant":96,"202505_Fireplace":120,"202501_Sci-Fi-Corridor":88,"2022_University":7,"202508_Substance 3D Designer":73};
 
 /* which work project is the big featured tile */
-const FEATURED_ID="202607_Desert";
+const FEATURED_ID="202607_Tent";
 
 /* ---------- helpers ---------- */
 const enc=p=>/^(https?:)?\/\//.test(p)?p:p.split('/').map(encodeURIComponent).join('/');
@@ -536,15 +541,30 @@ function attachZoom(img){
 }
 
 /* ---------- hero video ---------- */
-const HERO_VIDEO="aFk8BvfBDqs", HERO_FEAT="Desert", HERO_START=3;
+/* intro video pool: weight = 뽑힐 확률 비중, start = 시작 초 */
+const HERO_POOL=[
+  {id:"5DyMcMQkZRA", feat:"Tent",            start:3, weight:4},
+  {id:"S3YrEdIoGwo", feat:"Carriage",        start:0, weight:1},
+  {id:"w9qQhryEJyo", feat:"Ballista",        start:0, weight:1},
+  {id:"6bBYDblXAB8", feat:"Typewriter",      start:0, weight:1},
+  {id:"WztRE1nu7tA", feat:"Fireplace",       start:0, weight:1},
+  {id:"JpXG85YJ32I", feat:"Sci-Fi Corridor", start:0, weight:1},
+];
+function pickHero(){
+  const total=HERO_POOL.reduce((a,v)=>a+v.weight,0);
+  let r=Math.random()*total;
+  for(const v of HERO_POOL){ if((r-=v.weight)<0) return v; }
+  return HERO_POOL[0];
+}
 let heroPlayer;
 function initHero(){
-  $('#heroBg').innerHTML=`<iframe id="heroFrame" src="https://www.youtube.com/embed/${HERO_VIDEO}?autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&showinfo=0&start=${HERO_START}&enablejsapi=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
-  $('#heroFeat').innerHTML=`<span>Featured</span><b>${HERO_FEAT}</b>`;
+  const v=pickHero();
+  $('#heroBg').innerHTML=`<iframe id="heroFrame" src="https://www.youtube.com/embed/${v.id}?autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&showinfo=0&start=${v.start}&enablejsapi=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
+  $('#heroFeat').innerHTML=`<span>Featured</span><b>${v.feat}</b>`;
   window.onYouTubeIframeAPIReady=function(){
     heroPlayer=new YT.Player('heroFrame',{events:{
-      onReady:e=>{e.target.mute();e.target.seekTo(HERO_START);e.target.playVideo();},
-      onStateChange:e=>{ if(e.data===YT.PlayerState.ENDED){ e.target.seekTo(HERO_START); e.target.playVideo(); } }
+      onReady:e=>{e.target.mute();e.target.seekTo(v.start);e.target.playVideo();},
+      onStateChange:e=>{ if(e.data===YT.PlayerState.ENDED){ e.target.seekTo(v.start); e.target.playVideo(); } }
     }});
   };
   if(window.YT&&window.YT.Player){window.onYouTubeIframeAPIReady();}
@@ -560,10 +580,16 @@ function jumpTo(key){
 }
 $$('[data-jump]').forEach(a=>a.onclick=e=>{e.preventDefault();jumpTo(a.dataset.jump);setMenu(false);});
 const EMAIL='7120mh@naver.com';
+let toastTimer;
+function showToast(msg){
+  let t=document.getElementById('toast');
+  if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800);
+}
 function copyEmail(btn){
   navigator.clipboard.writeText(EMAIL).then(()=>{
-    const t=btn.textContent; btn.textContent='✓ 복사됨!';
-    setTimeout(()=>btn.textContent=t,1500);
+    showToast('✉ '+EMAIL+' — 메일 주소가 복사되었습니다');
   }).catch(()=>{location.href='mailto:'+EMAIL;});
 }
 ['email-nav','heroContact','aboutContact','footContact'].forEach(id=>{const b=document.getElementById(id);if(b)b.onclick=e=>{e.preventDefault();copyEmail(b);};});
@@ -579,6 +605,17 @@ window.addEventListener('scroll',()=>{
   $$('#navlinks a[data-jump]').forEach(a=>a.classList.toggle('active',a.dataset.jump===cur));
 },{passive:true});
 
+/* profile photo: try several file names until one loads */
+function loadProfile(){
+  const img=document.getElementById('profileImg'); if(!img) return;
+  const names=['profile.jpg','profile.png','profile.jpeg','profile.PNG','profile.JPG'];
+  let i=0;
+  const tryNext=()=>{ if(i>=names.length){img.parentElement.style.display='none';return;}
+    img.src='Icon/'+names[i++]; };
+  img.onerror=tryNext;
+  tryNext();
+}
+
 /* init */
 function init(){
   if('scrollRestoration' in history) history.scrollRestoration='manual';
@@ -586,6 +623,7 @@ function init(){
   $('#yr').textContent=new Date().getFullYear();
   $('#projCount').innerHTML='Projects — <b>'+PROJECTS.length+'</b>';
   $('#aboutTools').innerHTML=["3ds Max","ZBrush","Substance Painter","Substance Designer","Marmoset","Unreal Engine 5"].map(t=>`<span class="chip">${t}</span>`).join('');
+  loadProfile();
   initHero();
   renderWork();
   renderDesigner();
