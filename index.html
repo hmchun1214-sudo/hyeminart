@@ -109,10 +109,13 @@ main{padding-top:2vh}
 
 /* ABOUT */
 #about{padding:9vh 0 10vh;border-top:1px solid var(--line)}
-.about-grid{display:grid;grid-template-columns:auto 1.3fr 1fr;gap:48px;align-items:start}
+.about-grid{display:grid;grid-template-columns:auto minmax(0,1fr) 430px;gap:48px;align-items:start}
+.about-grid>*:nth-child(1){grid-column:1}
+.about-grid>*:nth-child(2){grid-column:2}
+.about-grid>*:nth-child(3){grid-column:3}
 .about-photo{width:230px;aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid var(--line2);background:var(--bg3)}
 .about-photo img{width:100%;height:100%;object-fit:cover}
-@media(max-width:1000px){.about-grid{grid-template-columns:1fr;gap:28px}.about-photo{width:200px}}
+@media(max-width:1000px){.about-grid{grid-template-columns:1fr;gap:28px}.about-grid>*{grid-column:auto}.about-photo{width:200px}}
 .about-lead{font-family:var(--body);font-weight:500;font-size:clamp(20px,2.4vw,28px);line-height:1.5;letter-spacing:-.01em}
 .about-lead b{color:var(--ember-ink);font-weight:700}
 .about-body{color:var(--dim);font-size:15px;line-height:1.7}
@@ -608,10 +611,10 @@ window.addEventListener('scroll',()=>{
 /* profile photo: try several file names until one loads */
 function loadProfile(){
   const img=document.getElementById('profileImg'); if(!img) return;
-  const names=['profile.jpg','profile.png','profile.jpeg','profile.PNG','profile.JPG'];
+  const names=['Icon/profile.jpg.png','Icon/profile.jpg','Icon/profile.png','Icon/profile.jpeg','Icon/profile.PNG','Icon/profile.JPG'];
   let i=0;
   const tryNext=()=>{ if(i>=names.length){img.parentElement.style.display='none';return;}
-    img.src='Icon/'+names[i++]; };
+    img.src=names[i++]; };
   img.onerror=tryNext;
   tryNext();
 }
