@@ -83,15 +83,18 @@ main{padding-top:2vh}
 .feat .fdate{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:18px 22px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.72))}
 @media(max-width:700px){.feat{aspect-ratio:4/3}}
 
-.mason{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
-@media(max-width:820px){.mason{grid-template-columns:repeat(2,1fr);gap:10px}}
-@media(max-width:520px){.mason{grid-template-columns:1fr}}
+.mason{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.mcard{grid-column:span 2}
+.mcard.mid{grid-column:span 3}
+@media(max-width:820px){.mason{grid-template-columns:repeat(2,1fr);gap:10px}.mcard{grid-column:span 1}.mcard.mid{grid-column:span 2}}
+@media(max-width:520px){.mason{grid-template-columns:1fr}.mcard,.mcard.mid{grid-column:span 1}}
 .mcard{position:relative;aspect-ratio:16/10;border-radius:11px;overflow:hidden;cursor:pointer;background:var(--bg3);border:1px solid rgba(255,255,255,.05)}
 .mcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .mcard:hover img{transform:scale(1.05)}
 .mcard .tags{position:absolute;top:10px;left:10px;z-index:3;display:flex;gap:6px}
 .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:3px 7px;border-radius:5px;background:rgba(0,0,0,.55);color:#fff}
 .tag.new{background:var(--ember);color:#160f07;font-weight:700}
+.tag.wip{background:#3a3f47;color:#ffd9a8;border:1px solid rgba(240,165,88,.45);font-weight:700}
 .mcard .mcap,.feat .mcap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.82));opacity:0;transition:opacity .3s}
 .mcard:hover .mcap,.feat:hover .mcap{opacity:1}
 .mcard .mcap .t,.feat .mcap .t{font-family:var(--disp);font-weight:800;font-size:18px;color:#fff}
@@ -99,7 +102,10 @@ main{padding-top:2vh}
 @media(hover:none){.mcard .mcap,.feat .mcap{opacity:1}}
 
 /* DESIGNER: square tiles */
-.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.dgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+@media(max-width:1100px){.dgrid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:760px){.dgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.dgrid{grid-template-columns:repeat(2,1fr)}}
 .dtile{aspect-ratio:1/1;border-radius:10px;overflow:hidden;cursor:pointer;background:#0a0b0d;position:relative;border:1px solid rgba(255,255,255,.05)}
 .dtile img{width:100%;height:100%;object-fit:contain;transition:transform .4s}
 .dtile:hover img{transform:scale(1.06)}
@@ -323,9 +329,12 @@ const PROJECTS=[
  P({id:"202607_Tent",title:"Tent",date:"2026-07",cat:"PERSONAL",video:"5DyMcMQkZRA",cover:"1.jpg",
     desc:"사막 위 텐트를 중심으로 한 환경 작업. 천막의 재질과 소품을 배치하고 언리얼에서 라이팅과 분위기를 잡았습니다.",
     imgs:["1.jpg","2.jpg","5.jpg","6.jpg","9.jpg","10.jpg","11.jpg","12.jpg","13.jpg"]}),
- P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"1.png",
+ P({id:"202607_Ruins",title:"Ruins",date:"2026-07",cat:"PERSONAL",cover:"00.png",wip:true,
+    desc:"유적을 배경으로 현재 제작 중인 환경 프로젝트입니다. 완성되는 대로 업데이트됩니다.",
+    imgs:["00.png","1.png","2.png","Untitled.png","Untitled_002.png","Untitled_003.png","Untitled_004.png","Untitled_012.png"]}),
+ P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"3.jpg",
     desc:"ZBrush로 스컬핑하고 Substance로 다듬은 바위 머티리얼 연구. 균열과 이끼, 마모된 표면을 PBR 텍스처로 표현하고 언리얼에서 라이팅으로 마무리했습니다.",
-    imgs:["1.png","2.png"].concat(seq(3,16),["17.png"])}),
+    imgs:seq(3,16).concat(["17.png"])}),
  P({id:"202604_Prop",title:"Props",date:"2026-04",cat:"PERSONAL",cover:"1.jpg",
     desc:"게임에 쓰일 소품 세트. 모델링·텍스처링으로 낡은 금속과 나무의 질감을 살렸습니다.",
     imgs:seq(1,12)}),
@@ -360,16 +369,31 @@ const PROJECTS=[
     desc:"Substance 3D Designer로 만든 절차적 머티리얼 스터디.",
     imgs:seq(1,12)}),
 ];
-const BASELINE={"202607_Tent":6,"202605_Rock":9,"202604_Prop":12,"202602_Prop":142,"202511_Carriage":51,"202511_Ballista":38,"202510_Door":10,"202506_Typewriter":44,"202506_Oceanic restaurant":96,"202505_Fireplace":120,"202501_Sci-Fi-Corridor":88,"2022_University":7,"202508_Substance 3D Designer":73};
+const BASELINE={"202607_Tent":6,"202607_Ruins":3,"202605_Rock":9,"202604_Prop":12,"202602_Prop":142,"202511_Carriage":51,"202511_Ballista":38,"202510_Door":10,"202506_Typewriter":44,"202506_Oceanic restaurant":96,"202505_Fireplace":120,"202501_Sci-Fi-Corridor":88,"2022_University":7,"202508_Substance 3D Designer":73};
 
 /* which work project is the big featured tile */
 const FEATURED_ID="202607_Tent";
 
 /* ---------- helpers ---------- */
 const enc=p=>/^(https?:)?\/\//.test(p)?p:p.split('/').map(encodeURIComponent).join('/');
-const viewsOf=id=>BASELINE[id]||0;
+/* live view counts — free counter API (no signup) */
+const VIEW_API='https://abacus.jasoncameron.dev', VIEW_NS='hyeminart-hmchun1214';
+let LIVE={};
+const viewsOf=id=>(BASELINE[id]||0)+(LIVE[id]||0);
+async function loadViews(){
+  await Promise.all(PROJECTS.map(async p=>{
+    try{const r=await fetch(`${VIEW_API}/get/${VIEW_NS}/${encodeURIComponent(p.id)}`);
+      if(r.ok){const j=await r.json();if(typeof j.value==='number')LIVE[p.id]=j.value;}
+    }catch(e){}
+  }));
+  renderWork();
+}
+function bumpView(id){
+  LIVE[id]=(LIVE[id]||0)+1;
+  fetch(`${VIEW_API}/hit/${VIEW_NS}/${encodeURIComponent(id)}`).catch(()=>{});
+}
 function isNew(d){const dd=new Date(d+'-01');const now=new Date();return (now-dd)/(1000*3600*24)<95;}
-function fmtDate(d){const[y,m]=d.split('-');return m+' '+y;}
+function fmtDate(d){const[y,m]=d.split('-');return y+'.'+m;}
 const thumbOf=m=>typeof m==='string'?m:(m.thumb||'');
 const isVid=m=>typeof m!=='string'&&m.type==='youtube';
 
@@ -389,13 +413,13 @@ function renderWork(){
     fw.appendChild(el);
   }
   const m=$('#workMason'); m.innerHTML='';
-  rest.forEach(p=>{
+  rest.forEach((p,idx)=>{
     const v=viewsOf(p.id);
     const card=document.createElement('div');
-    card.className='mcard';
+    card.className='mcard'+(idx<2?' mid':'');
     card.innerHTML=`
-      <div class="tags">${isNew(p.date)?'<span class="tag new">NEW</span>':''}${v>=10?'<span class="tag">'+v+'</span>':''}</div>
-      <img loading="lazy" src="${enc(p.cover)}" alt="${p.title}">
+      <div class="tags">${p.wip?'<span class="tag wip">제작 중</span>':''}${isNew(p.date)?'<span class="tag new">NEW</span>':''}${v>=10?'<span class="tag">'+v+'</span>':''}</div>
+      <img loading="lazy" decoding="async" src="${enc(p.cover)}" alt="${p.title}">
       <div class="mcap"><div class="t">${p.title}</div><div class="dt">${fmtDate(p.date)}</div></div>`;
     card.onclick=()=>openLightbox(p.id,0);
     m.appendChild(card);
@@ -412,7 +436,7 @@ function renderDesigner(){
   imgs.forEach((src,i)=>{
     const t=document.createElement('div');
     t.className='dtile';
-    t.innerHTML=`<img loading="lazy" src="${enc(src)}" alt="material ${i+1}"><div class="lbl">MAT ${String(i+1).padStart(2,'0')}</div>`;
+    t.innerHTML=`<img loading="lazy" decoding="async" src="${enc(src)}" alt="material ${i+1}"><div class="lbl">MAT ${String(i+1).padStart(2,'0')}</div>`;
     t.onclick=()=>openLightbox(proj.id,i);
     g.appendChild(t);
   });
@@ -426,6 +450,7 @@ function openLightbox(id,imgIdx){
   const p=ALLPROJ[projIdx];
   flat=p.images.slice();
   pos=Math.max(0,Math.min(imgIdx||0,flat.length-1));
+  bumpView(p.id);
   fillSide(p);
   buildRail();
   $('#lb').classList.add('open');
@@ -437,7 +462,7 @@ function closeLightbox(){$('#lb').classList.remove('open');document.body.style.o
 function fillSide(p){
   $('#lbTitle').textContent=p.title;
   const[dy,dm]=p.date.split('-');
-  $('#lbMeta').innerHTML=`${dm} ${dy}<span class="sep">/</span>${p.category==='DESIGNER'?'DESIGNER':'WORK'}`;
+  $('#lbMeta').innerHTML=`${dy}.${dm}<span class="sep">/</span>${p.category==='DESIGNER'?'DESIGNER':'WORK'}${p.wip?'<span class="sep">/</span>제작 중':''}`;
   $('#lbDesc').textContent=p.desc||'';
   $('#lbTools').innerHTML=(p.tools||[]).map(t=>`<span>${t}</span>`).join('');
   const imgN=p.images.filter(m=>typeof m==='string').length;
@@ -448,7 +473,7 @@ function buildRail(){
   flat.forEach((m,i)=>{
     const th=document.createElement('div');
     th.className='th'+(i===pos?' active':'');
-    th.innerHTML=`<img loading="lazy" src="${enc(thumbOf(m))}" alt="">${isVid(m)?'<span class="vbadge">▶</span>':''}`;
+    th.innerHTML=`<img loading="lazy" decoding="async" src="${enc(thumbOf(m))}" alt="">${isVid(m)?'<span class="vbadge">▶</span>':''}`;
     th.onclick=()=>{pos=i;show();};
     rail.appendChild(th);
   });
@@ -561,7 +586,7 @@ function pickHero(){
 let heroPlayer;
 function initHero(){
   const v=pickHero();
-  $('#heroBg').innerHTML=`<iframe id="heroFrame" src="https://www.youtube.com/embed/${v.id}?autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&showinfo=0&start=${v.start}&enablejsapi=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
+  $('#heroBg').innerHTML=`<iframe id="heroFrame" src="https://www.youtube.com/embed/${v.id}?autoplay=1&mute=1&vq=hd1080&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&showinfo=0&start=${v.start}&enablejsapi=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
   window.onYouTubeIframeAPIReady=function(){
     heroPlayer=new YT.Player('heroFrame',{events:{
       onReady:e=>{e.target.mute();e.target.seekTo(v.start);e.target.playVideo();},
@@ -628,6 +653,7 @@ function init(){
   initHero();
   renderWork();
   renderDesigner();
+  loadViews();
 }
 init();
 window.addEventListener('load',()=>window.scrollTo(0,0));
