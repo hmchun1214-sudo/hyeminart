@@ -332,7 +332,7 @@ const PROJECTS=[
  P({id:"202607_Ruins",title:"Ruins",date:"2026-07",cat:"PERSONAL",cover:"00.png",wip:true,
     desc:"유적을 배경으로 현재 제작 중인 환경 프로젝트입니다. 완성되는 대로 업데이트됩니다.",
     imgs:["00.png","1.png","2.png","Untitled.png","Untitled_002.png","Untitled_003.png","Untitled_004.png","Untitled_012.png"]}),
- P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"3.jpg",
+ P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"3.jpg",nonew:true,
     desc:"ZBrush로 스컬핑하고 Substance로 다듬은 바위 머티리얼 연구. 균열과 이끼, 마모된 표면을 PBR 텍스처로 표현하고 언리얼에서 라이팅으로 마무리했습니다.",
     imgs:seq(3,16).concat(["17.png"])}),
  P({id:"202602_Prop",title:"Props",date:"2026-02",cat:"PERSONAL",cover:"1.jpg",
@@ -415,7 +415,7 @@ function renderWork(){
     const card=document.createElement('div');
     card.className='mcard'+(idx<2?' mid':'');
     card.innerHTML=`
-      <div class="tags">${p.wip?'<span class="tag wip">제작 중</span>':''}${(!p.wip&&isNew(p.date))?'<span class="tag new">NEW</span>':''}${v>=10?'<span class="tag">'+v+'</span>':''}</div>
+      <div class="tags">${p.wip?'<span class="tag wip">제작 중</span>':''}${(!p.wip&&!p.nonew&&isNew(p.date))?'<span class="tag new">NEW</span>':''}${v>=10?'<span class="tag">'+v+'</span>':''}</div>
       <img loading="lazy" decoding="async" src="${enc(p.cover)}" alt="${p.title}">
       <div class="mcap"><div class="t">${p.title}</div><div class="dt">${fmtDate(p.date)}</div></div>`;
     card.onclick=()=>openLightbox(p.id,0);
