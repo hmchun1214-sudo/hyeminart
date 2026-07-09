@@ -335,12 +335,9 @@ const PROJECTS=[
  P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"3.jpg",
     desc:"ZBrush로 스컬핑하고 Substance로 다듬은 바위 머티리얼 연구. 균열과 이끼, 마모된 표면을 PBR 텍스처로 표현하고 언리얼에서 라이팅으로 마무리했습니다.",
     imgs:seq(3,16).concat(["17.png"])}),
- P({id:"202604_Prop",title:"Props",date:"2026-04",cat:"PERSONAL",cover:"1.jpg",
-    desc:"게임에 쓰일 소품 세트. 모델링·텍스처링으로 낡은 금속과 나무의 질감을 살렸습니다.",
-    imgs:seq(1,12)}),
- P({id:"202602_Prop",title:"Props II",date:"2026-02",cat:"PERSONAL",cover:"13.jpg",
-    desc:"다양한 소품을 모은 세트. 형태와 재질의 디테일에 집중했습니다.",
-    imgs:["13.jpg","14.jpg","15.jpg","16.jpg","17.png","18.jpg","19.jpg","20.jpg","21.jpg","22.jpg","23.jpg","24.jpg","25.jpg","26.jpg"]}),
+ P({id:"202602_Prop",title:"Props",date:"2026-02",cat:"PERSONAL",cover:"1.jpg",
+    desc:"게임에 쓰일 소품 세트. 모델링·텍스처링으로 낡은 금속과 나무의 질감을 살려 하나의 묶음으로 완성했습니다.",
+    imgs:seq(1,16).concat(["17.png"]).concat(seq(18,26))}),
  P({id:"202511_Carriage",title:"Carriage",date:"2025-11",cat:"PERSONAL",video:"S3YrEdIoGwo",cover:"1.jpg",
     desc:"오래된 목재 마차. 풍화된 나뭇결과 녹슨 철물, 쌓인 흙먼지까지 담아 시간이 느껴지는 프롭으로 제작했습니다.",
     imgs:seq(1,8).concat(["9.png"])}),
@@ -369,7 +366,7 @@ const PROJECTS=[
     desc:"Substance 3D Designer로 만든 절차적 머티리얼 스터디.",
     imgs:seq(1,12)}),
 ];
-const BASELINE={"202607_Tent":6,"202607_Ruins":3,"202605_Rock":9,"202604_Prop":12,"202602_Prop":142,"202511_Carriage":51,"202511_Ballista":38,"202510_Door":10,"202506_Typewriter":44,"202506_Oceanic restaurant":96,"202505_Fireplace":120,"202501_Sci-Fi-Corridor":88,"2022_University":7,"202508_Substance 3D Designer":73};
+const BASELINE={"202607_Tent":6,"202607_Ruins":3,"202605_Rock":9,"202602_Prop":142,"202511_Carriage":51,"202511_Ballista":38,"202510_Door":10,"202506_Typewriter":44,"202506_Oceanic restaurant":96,"202505_Fireplace":120,"202501_Sci-Fi-Corridor":88,"2022_University":7,"202508_Substance 3D Designer":73};
 
 /* which work project is the big featured tile */
 const FEATURED_ID="202607_Tent";
@@ -418,7 +415,7 @@ function renderWork(){
     const card=document.createElement('div');
     card.className='mcard'+(idx<2?' mid':'');
     card.innerHTML=`
-      <div class="tags">${p.wip?'<span class="tag wip">제작 중</span>':''}${isNew(p.date)?'<span class="tag new">NEW</span>':''}${v>=10?'<span class="tag">'+v+'</span>':''}</div>
+      <div class="tags">${p.wip?'<span class="tag wip">제작 중</span>':''}${(!p.wip&&isNew(p.date))?'<span class="tag new">NEW</span>':''}${v>=10?'<span class="tag">'+v+'</span>':''}</div>
       <img loading="lazy" decoding="async" src="${enc(p.cover)}" alt="${p.title}">
       <div class="mcap"><div class="t">${p.title}</div><div class="dt">${fmtDate(p.date)}</div></div>`;
     card.onclick=()=>openLightbox(p.id,0);
