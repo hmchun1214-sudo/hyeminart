@@ -323,7 +323,7 @@ function P(o){
   const imgs=o.imgs.map(f=>base+f);
   const media=(o.video?[{type:'youtube',id:o.video,thumb:'https://img.youtube.com/vi/'+o.video+'/maxresdefault.jpg'}]:[]).concat(imgs);
   return {id:o.id,title:o.title,date:o.date,category:o.cat,tools:o.tools||["3ds Max","ZBrush","Substance","UE5"],
-    cover:base+o.cover,desc:o.desc||'',video:o.video||null,images:media};
+    cover:base+o.cover,desc:o.desc||'',video:o.video||null,images:media,wip:!!o.wip,nonew:!!o.nonew};
 }
 const PROJECTS=[
  P({id:"202607_Tent",title:"Tent",date:"2026-07",cat:"PERSONAL",video:"bHrxSubYUaU",cover:"1.jpg",
