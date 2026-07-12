@@ -292,7 +292,6 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
     <div class="foot">
       <div class="big">Let’s build worlds.</div>
       <div class="r">
-        <button class="btn solid" id="footContact">✉ 7120mh@naver.com</button>
         <a data-jump="PERSONAL">↑ Back to work</a>
       </div>
     </div>
@@ -333,37 +332,37 @@ function P(o){
 }
 const PROJECTS=[
  P({id:"202607_Tent",title:"Tent",date:"2026-07",cat:"PERSONAL",video:"bHrxSubYUaU",cover:"1.jpg",
-    desc:"사막 위 텐트를 중심으로 한 환경 작업. 천막의 재질과 소품을 배치하고 언리얼에서 라이팅과 분위기를 잡았습니다.",
+    desc:"사막 위 텐트를 중심으로 한 환경 작업. 실제 유목 천막의 구조와 천 재질 자료를 조사해 형태를 잡고, 언리얼에서 사막의 빛과 분위기를 완성했습니다.",
     imgs:["1.jpg","2.jpg","5.jpg","6.jpg","9.jpg","10.jpg","11.jpg","12.jpg","13.jpg"]}),
  P({id:"202607_Ruins",title:"Ruins",date:"2026-07",cat:"PERSONAL",cover:"00.jpg",wip:true,
-    desc:"유적을 배경으로 현재 제작 중인 환경 프로젝트입니다. 완성되는 대로 업데이트됩니다.",
+    desc:"유적을 배경으로 현재 제작 중인 환경 프로젝트입니다. 석조 유적 레퍼런스를 수집·분석하며 작업 중이며, 완성되는 대로 업데이트됩니다.",
     imgs:["00.jpg","1.png","2.png","Untitled.jpg","Untitled_002.jpg","Untitled_003.jpg","Untitled_004.jpg","Untitled_012.jpg"]}),
  P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"5.jpg",nonew:true,
-    desc:"ZBrush로 스컬핑하고 Substance로 다듬은 바위 머티리얼 연구. 균열과 이끼, 마모된 표면을 PBR 텍스처로 표현하고 언리얼에서 라이팅으로 마무리했습니다.",
+    desc:"실제 암석 사진을 수집해 균열과 침식 패턴을 분석한 뒤, ZBrush 스컬핑과 Substance 텍스처링으로 옮긴 바위 머티리얼 연구입니다. 언리얼 라이팅으로 마무리했습니다.",
     imgs:["5.jpg","6.jpg","3.jpg","4.jpg"].concat(seq(7,16),["17.png"])}),
  P({id:"202602_Prop",title:"Props",date:"2026-02",cat:"PERSONAL",cover:"1.jpg",
-    desc:"게임에 쓰일 소품 세트. 모델링·텍스처링으로 낡은 금속과 나무의 질감을 살려 하나의 묶음으로 완성했습니다.",
+    desc:"게임 속 공간을 채우는 소품 세트. 실물 자료를 참고해 낡은 금속과 나무의 질감을 관찰하고, 형태와 재질의 디테일로 옮기는 데 집중했습니다.",
     imgs:seq(1,16).concat(["17.png"]).concat(seq(18,26))}),
  P({id:"202511_Carriage",title:"Carriage",date:"2025-11",cat:"PERSONAL",video:"S3YrEdIoGwo",cover:"1.jpg",
-    desc:"오래된 목재 마차. 풍화된 나뭇결과 녹슨 철물, 쌓인 흙먼지까지 담아 시간이 느껴지는 프롭으로 제작했습니다.",
+    desc:"오래된 목재 마차. 실제 마차의 구조와 철물 결합부 자료를 조사해 형태를 잡고, 풍화된 나뭇결과 흙먼지까지 담아 시간이 느껴지는 프롭으로 완성했습니다.",
     imgs:seq(1,8).concat(["9.png"])}),
  P({id:"202511_Ballista",title:"Ballista",date:"2025-11",cat:"PERSONAL",video:"w9qQhryEJyo",cover:"1.jpg",
-    desc:"공성 병기 발리스타. 거친 목재와 단조 철물의 대비를 살리고 전투의 흔적을 더해 묵직한 무게감을 표현했습니다.",
+    desc:"공성 병기 발리스타. 실제 공성 병기의 구동 구조 자료를 참고해 형태를 잡고, 거친 목재와 단조 철물의 대비에 전투의 흔적을 더해 무게감을 표현했습니다.",
     imgs:seq(1,6)}),
  P({id:"202510_Door",title:"Door",date:"2025-10",cat:"PERSONAL",cover:"1.jpg",
-    desc:"문 에셋. 낡은 목재와 금속 장식의 질감을 중심으로 작은 디테일까지 손본 프롭입니다.",
+    desc:"문 에셋. 오래된 문의 실물 레퍼런스를 참고해 목재와 금속 장식의 질감을 관찰하고, 손잡이와 경첩 같은 작은 디테일까지 손본 프롭입니다.",
     imgs:seq(1,8)}),
  P({id:"202506_Typewriter",title:"Typewriter",date:"2025-06",cat:"PERSONAL",video:"6bBYDblXAB8",cover:"1.jpg",
-    desc:"빈티지 타자기 프롭. 금속의 마모와 각인된 글자, 미세한 먼지까지 살려 사실적인 디테일에 집중했습니다.",
+    desc:"빈티지 타자기 프롭. 실제 타자기 자료를 조사해 부품 구조를 파악하고, 금속의 마모와 각인된 글자, 미세한 먼지까지 살려 사실적으로 완성했습니다.",
     imgs:seq(1,10)}),
  P({id:"202506_Oceanic restaurant",title:"Oceanic Restaurant",date:"2025-06",cat:"PERSONAL",cover:"1.jpg",
-    desc:"바다를 테마로 한 레스토랑 환경. 공간의 무드와 소품 배치, 조명으로 하나의 장면을 연출했습니다.",
+    desc:"바다를 테마로 한 레스토랑 환경. 공간의 컨셉을 먼저 정하고, 소품 배치와 조명으로 그 안에 앉아보고 싶은 한 장면을 만들었습니다.",
     imgs:seq(1,20)}),
  P({id:"202505_Fireplace",title:"Fireplace",date:"2025-05",cat:"PERSONAL",video:"WztRE1nu7tA",cover:"1.jpg",
-    desc:"벽난로가 있는 장면. 따뜻한 불빛과 그림자, 오래된 재질감으로 아늑한 분위기를 만들었습니다.",
+    desc:"벽난로가 있는 장면. 고전 인테리어 자료를 참고해 구조와 장식을 잡고, 따뜻한 불빛과 그림자, 오래된 재질감으로 아늑한 분위기를 만들었습니다.",
     imgs:seq(1,5)}),
  P({id:"202501_Sci-Fi-Corridor",title:"Sci-Fi Corridor",date:"2025-01",cat:"PERSONAL",video:"JpXG85YJ32I",cover:"1.jpg",
-    desc:"SF 콘셉트의 통로 환경. 하드서페이스 모델링과 강한 라이팅 대비로 긴장감 있는 공간을 구성했습니다.",
+    desc:"SF 콘셉트의 통로 환경. 게임과 영화 속 SF 공간의 레퍼런스를 분석해 하드서페이스 모델링으로 옮기고, 강한 라이팅 대비로 긴장감을 구성했습니다.",
     imgs:seq(1,5).concat(["HighresScreenshot00297.jpg","HighresScreenshot00300.jpg"])}),
  P({id:"2022_University",title:"School",date:"2022-09",cat:"PERSONAL",cover:"00.png",
     desc:"학교 수업에서 진행한 습작 모음입니다. 캐릭터와 환경을 두루 연습한 과정 작업입니다.",
