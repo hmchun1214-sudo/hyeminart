@@ -196,6 +196,11 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
   padding:11px 18px;border-radius:9px;box-shadow:0 12px 34px rgba(0,0,0,.5);
   opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.lb-wip{display:none;position:absolute;top:22px;left:22px;z-index:7;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;font-weight:700;
+  color:#ffd9a8;background:rgba(20,18,14,.72);border:1px solid rgba(240,165,88,.55);
+  padding:7px 12px;border-radius:7px;backdrop-filter:blur(6px);pointer-events:none}
+.about-sub{font-family:var(--body);font-size:15.5px;color:var(--dim);line-height:1.75;margin-top:18px;max-width:720px}
 </style>
 </head>
 <body>
@@ -266,6 +271,7 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
         <div class="about-photo"><img id="profileImg" alt="chun hyemin"></div>
         <div>
           <p class="about-lead">환경과 프롭을 중심으로 작업하는 3D 아티스트입니다. 레퍼런스 분석과 블록아웃에서 시작해 모델링·스컬핑·텍스처링·라이팅까지 전 과정을 직접 다루며, 작은 소품의 재질과 디테일까지 신경 써 실제 게임에 쓸 수 있는 완성도로 마무리합니다.</p>
+          <p class="about-sub">장르를 가리지 않고 게임을 오래, 많이 봐온 만큼 좋은 공간이 주는 감각을 알고 있습니다. 만드는 사람으로서는 근거를 찾습니다 — 장면 하나를 만들기 전 관련 자료와 레퍼런스를 폭넓게 조사하고 분석한 뒤 시작합니다.</p>
         </div>
         <div>
           <p class="about-label">Tools</p>
@@ -300,6 +306,7 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
   <div class="lb-stage" id="lbStage">
     <button class="lb-arrow prev" id="lbPrev">‹<small>PREV PROJECT</small></button>
     <div id="lbMedia"></div>
+    <div class="lb-wip" id="lbWip">WIP · 제작 중</div>
     <button class="lb-arrow next" id="lbNext">›<small>NEXT PROJECT</small></button>
   </div>
   <aside class="lb-side">
@@ -462,6 +469,7 @@ function fillSide(p){
   $('#lbMeta').innerHTML=`${dy}.${dm}<span class="sep">/</span>${p.category==='DESIGNER'?'DESIGNER':'WORK'}${p.wip?'<span class="sep">/</span>제작 중':''}`;
   $('#lbDesc').textContent=p.desc||'';
   $('#lbTools').innerHTML=(p.tools||[]).map(t=>`<span>${t}</span>`).join('');
+  $('#lbWip').style.display=p.wip?'block':'none';
   const imgN=p.images.filter(m=>typeof m==='string').length;
   $('#lbCount').textContent=(p.video?'1 VIDEO · ':'')+imgN+' IMAGES';
 }
