@@ -83,12 +83,13 @@ main{padding-top:2vh}
 .feat .fdate{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:18px 22px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.72))}
 @media(max-width:700px){.feat{aspect-ratio:4/3}}
 
-.mason{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
-.mcard{grid-column:span 2}
-.mcard.mid{grid-column:span 3}
-@media(max-width:820px){.mason{grid-template-columns:repeat(2,1fr);gap:10px}.mcard{grid-column:span 1}.mcard.mid{grid-column:span 2}}
-@media(max-width:520px){.mason{grid-template-columns:1fr}.mcard,.mcard.mid{grid-column:span 1}}
-.mcard{position:relative;aspect-ratio:16/10;border-radius:11px;overflow:hidden;cursor:pointer;background:var(--bg3);border:1px solid rgba(255,255,255,.05)}
+.mason{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.mcard{grid-column:span 4;position:relative;aspect-ratio:16/10;border-radius:11px;overflow:hidden;cursor:pointer;background:var(--bg3);border:1px solid rgba(255,255,255,.05)}
+.mcard.row-2{grid-column:span 6;aspect-ratio:21/10}
+.mcard.row-3{grid-column:span 4;aspect-ratio:16/8.5}
+.mcard.row-4{grid-column:span 3}
+@media(max-width:820px){.mason{grid-template-columns:repeat(2,1fr);gap:10px}.mcard,.mcard.row-2,.mcard.row-3,.mcard.row-4{grid-column:span 1}}
+@media(max-width:520px){.mason{grid-template-columns:1fr}.mcard,.mcard.row-2,.mcard.row-3,.mcard.row-4{grid-column:span 1}}
 .mcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .mcard:hover img{transform:scale(1.05)}
 .mcard .tags{position:absolute;top:10px;left:10px;z-index:3;display:flex;gap:6px}
@@ -115,13 +116,8 @@ main{padding-top:2vh}
 
 /* ABOUT */
 #about{padding:9vh 0 10vh;border-top:1px solid var(--line)}
-.about-grid{display:grid;grid-template-columns:auto minmax(0,1fr) 430px;gap:48px;align-items:start}
-.about-grid>*:nth-child(1){grid-column:1}
-.about-grid>*:nth-child(2){grid-column:2}
-.about-grid>*:nth-child(3){grid-column:3}
-.about-photo{width:170px;aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid var(--line2);background:var(--bg3)}
-.about-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.82) contrast(1.05);opacity:.9}
-@media(max-width:1000px){.about-grid{grid-template-columns:1fr;gap:28px}.about-grid>*{grid-column:auto}.about-photo{width:200px}}
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,400px);gap:clamp(32px,6vw,88px);align-items:start}
+@media(max-width:800px){.about-grid{grid-template-columns:1fr;gap:28px}}
 .about-lead{font-family:var(--body);font-weight:500;font-size:clamp(20px,2.4vw,28px);line-height:1.5;letter-spacing:-.01em}
 .about-lead b{color:var(--ember-ink);font-weight:700}
 .about-body{color:var(--dim);font-size:15px;line-height:1.7}
@@ -131,6 +127,7 @@ main{padding-top:2vh}
 .chip{font-family:var(--mono);font-size:11.5px;color:var(--dim);border:1px solid var(--line2);border-radius:999px;padding:6px 12px}
 .about-meta{display:flex;flex-direction:column;gap:9px;font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.05em;margin-top:6px}
 .about-meta b{color:var(--ink);font-weight:500}
+.about-role{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ember-ink);text-transform:uppercase;margin:0 0 18px}
 
 /* FOOTER */
 footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
@@ -268,8 +265,8 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
     <div class="wrap">
       <div class="sec-eyebrow">About</div>
       <div class="about-grid">
-        <div class="about-photo"><img id="profileImg" alt="chun hyemin"></div>
         <div>
+          <p class="about-role">3D Environment &amp; Prop Artist</p>
           <p class="about-lead">환경과 프롭을 중심으로 작업하는 3D 아티스트입니다. 장르를 가리지 않고 게임을 오래, 많이 봐온 만큼 좋은 공간이 주는 감각을 알고 있으며, 장면 하나를 만들기 전 관련 자료와 레퍼런스를 폭넓게 조사하고 분석한 뒤 모델링·스컬핑·텍스처링·라이팅까지 전 과정을 직접 다뤄 실제 게임에 쓸 수 있는 완성도로 마무리합니다.</p>
         </div>
         <div>
@@ -277,6 +274,7 @@ footer{border-top:1px solid var(--line);padding:3.5vh 0 3vh;margin-top:2vh}
           <div class="tools" id="aboutTools"></div>
           <p class="about-label">Info</p>
           <div class="about-meta">
+            <span>Born — <b>2001.12</b></span>
             <span>Based in — <b>Seoul, KR</b></span>
             <span id="projCount"></span>
           </div>
@@ -340,9 +338,12 @@ const PROJECTS=[
  P({id:"202605_Rock",title:"Rock Material Study",date:"2026-06",cat:"PERSONAL",cover:"5.jpg",nonew:true,
     desc:"바위마다 다른 갈라짐과 침식을 관찰해 ZBrush 스컬핑으로 덩어리감과 균열을 잡고, Substance로 PBR 재질 표현에 집중한 머티리얼 스터디입니다. 언리얼 라이팅으로 재질감을 확인하며 마무리했습니다.",
     imgs:["5.jpg","6.jpg","3.jpg","4.jpg"].concat(seq(7,16),["17.png"])}),
- P({id:"202602_Prop",title:"Props",date:"2026-02",cat:"PERSONAL",cover:"01.jpg",
+ P({id:"202602_Prop",title:"Props I",date:"2026-02",cat:"PERSONAL",cover:"01.jpg",
     desc:"게임 속 공간을 채우는 소품 세트. 실물 자료를 참고해 낡은 금속과 나무의 질감을 관찰하고, 형태와 재질의 디테일로 옮기는 데 집중했습니다.",
-    imgs:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg"].concat(seq(6,21),["22.png"],seq(23,31))}),
+    imgs:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg"].concat(seq(6,17))}),
+ P({id:"202602_Prop2",title:"Props II",date:"2026-02",cat:"PERSONAL",cover:"18.jpg",
+    desc:"게임 공간을 위한 두 번째 소품 세트. 형태와 재질의 차이를 살피며 다양한 프롭의 디테일을 완성했습니다.",
+    imgs:seq(18,21).concat(["22.png"],seq(23,31))}),
  P({id:"202511_Carriage",title:"Carriage",date:"2025-11",cat:"PERSONAL",video:"S3YrEdIoGwo",cover:"1.jpg",
     desc:"오래된 목재 마차. 실제 마차의 구조와 철물 결합부 자료를 조사해 형태를 잡고, 풍화된 나뭇결과 흙먼지까지 담아 시간이 느껴지는 프롭으로 완성했습니다.",
     imgs:seq(1,8).concat(["9.png"])}),
@@ -418,7 +419,9 @@ function renderWork(){
   rest.forEach((p,idx)=>{
     const v=viewsOf(p.id);
     const card=document.createElement('div');
-    card.className='mcard'+(idx<2?' mid':'');
+    // The featured work stays full-width; the remaining projects read as 2 / 3 / 3 / 4.
+    const size=idx<2?'row-2':idx<8?'row-3':'row-4';
+    card.className='mcard '+size;
     card.innerHTML=`
       <div class="tags">${p.wip?'<span class="tag wip">제작 중</span>':''}${(!p.wip&&!p.nonew&&isNew(p.date))?'<span class="tag new">NEW</span>':''}${v>=10?'<span class="tag">'+v+'</span>':''}</div>
       <img loading="lazy" decoding="async" src="${enc(p.cover)}" alt="${p.title}">
@@ -634,17 +637,6 @@ window.addEventListener('scroll',()=>{
   $$('#navlinks a[data-jump]').forEach(a=>a.classList.toggle('active',a.dataset.jump===cur));
 },{passive:true});
 
-/* profile photo: try several file names until one loads */
-function loadProfile(){
-  const img=document.getElementById('profileImg'); if(!img) return;
-  const names=['Icon/profile.jpg.png','Icon/profile.jpg','Icon/profile.png','Icon/profile.jpeg','Icon/profile.PNG','Icon/profile.JPG'];
-  let i=0;
-  const tryNext=()=>{ if(i>=names.length){img.parentElement.style.display='none';return;}
-    img.src=names[i++]; };
-  img.onerror=tryNext;
-  tryNext();
-}
-
 /* init */
 function init(){
   if('scrollRestoration' in history) history.scrollRestoration='manual';
@@ -652,7 +644,6 @@ function init(){
   $('#yr').textContent=new Date().getFullYear();
   $('#projCount').innerHTML='Projects — <b>'+PROJECTS.length+'</b>';
   $('#aboutTools').innerHTML=["3ds Max","ZBrush","Substance Painter","Substance Designer","Marmoset","Unreal Engine 5"].map(t=>`<span class="chip">${t}</span>`).join('');
-  loadProfile();
   initHero();
   renderWork();
   renderDesigner();
