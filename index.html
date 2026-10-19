@@ -383,7 +383,7 @@ const BASELINE={"202607_Tent":6,"2026_Ruins":3,"202605_Rock":9,"202602_Prop":142
 const FEATURED_ID="202607_Tent";
 
 /* ---------- helpers ---------- */
-const enc=p=>/^(https?:)?\/\//.test(p)?p:p.split('/').map(encodeURIComponent).join('/');
+const enc=p=>/^(https?:)?\/\//.test(p)?p:p.split('/').map(encodeURIComponent).join('/')+'?v=20261020';
 /* live view counts — free counter API (no signup) */
 const VIEW_API='https://abacus.jasoncameron.dev', VIEW_NS='hyeminart-hmchun1214';
 let LIVE={};
